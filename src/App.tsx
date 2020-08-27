@@ -4,7 +4,7 @@ function App() {
   return (
     <div style={{width: '85%',margin: '2rem auto'}}>
       <header>
-        <h1 style={{fontFamily: "Arial"}}>Hello World</h1>
+        <h1 style={{fontFamily: "TimesNewRoman"}}>Hello World</h1>
         <h2>Hello World</h2>
         <h3>Hello World</h3>
         <h3>Hello World</h3>
