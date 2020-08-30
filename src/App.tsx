@@ -5,8 +5,8 @@ function App() {
   return (
     <div style={{width: '85%',margin: '2rem auto'}}>
       <header>
-        <Button btnType={ButtonType.Primary} disabled>Hello World</Button>
-        <Button 
+        <Button btnType={ButtonType.Primary} className='customer-class' disabled>Hello World</Button>
+        <Button onClick={()=>{alert('aaa');}} 
           btnType={ButtonType.Primary}
           size={ButtonSize.Large}>Hello World</Button>
         <Button 
@@ -36,9 +36,12 @@ function App() {
           href="http://www.baidu.com" disabled>Hello World</Button>
         <Button 
           btnType={ButtonType.Link}
+          target='_blank'
+          href="http://www.baidu.com" 
           size={ButtonSize.Large}>Hello World</Button>
         <Button 
           btnType={ButtonType.Link}
+          href="http://www.baidu.com" 
           size={ButtonSize.Small}>Hello World</Button>
         <hr/>
         

@@ -21,7 +21,10 @@ interface BaseButtonProps {
   href?: string;
   className?: string;
 }
-
+// 添加button和a的所有原生属性
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 /**
  * 不同的Button Type：
  *   primary default danger（button元素） link-button（a元素）
@@ -45,24 +48,24 @@ interface BaseButtonProps {
  *   Viking Button
  * </Button>
  */
-const Button: React.FC<BaseButtonProps> = (props) => {
-  const { btnType, disabled, size, children, href } = props;
+const Button: React.FC<ButtonProps> = (props) => {
+  const { btnType, className,disabled, size, children, href,...restProps } = props;
   // btn, btn-lg btn-primary
-  const classes = classnames('btn', {
+  const classes = classnames('btn', className,{
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     'disabled': (btnType === ButtonType.Link) && disabled
   });
   if (btnType === ButtonType.Link && href) {
     return (
-      <a className={classes} href={href}>
+      <a className={classes} href={href} {...restProps}>
         {children}
       </a>
     )
   } else {
     return (
       <button className={classes}
-        disabled={disabled}
+        disabled={disabled} {...restProps}
       >{children}</button>
     )
   }
