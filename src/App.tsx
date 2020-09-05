@@ -2,6 +2,7 @@ import React from 'react';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import LikeButton from './hooks/LikeButton';
 import MouseTracker from './hooks/MouseTracker';
+import DogShow from './hooks/DogShow';
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
         <MouseTracker />
         <hr />
         <LikeButton />
+        <hr />
+        <DogShow />
         <hr />
         <h1>Hello World</h1>
         <h2>Hello World</h2>
