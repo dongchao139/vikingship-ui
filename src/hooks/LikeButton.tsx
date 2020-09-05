@@ -7,7 +7,7 @@ const LikeButton: React.FC = () => {
   // 不需要清除的副作用
   useEffect(() => {
     document.title = `You Clicked ${like} times`;
-  });
+  }, [like]); // 只有当like改变时才执行effect
 
   return (
     <>
