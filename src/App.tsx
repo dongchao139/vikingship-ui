@@ -1,5 +1,7 @@
 import React from 'react';
 import Button,{ButtonType, ButtonSize} from './components/Button/button';
+import LikeButton from './hooks/LikeButton';
+import MouseTracker from './hooks/MouseTracker';
 
 function App() {
   return (
@@ -44,7 +46,10 @@ function App() {
           href="http://www.baidu.com" 
           size={ButtonSize.Small}>Hello World</Button>
         <hr/>
-        
+        <MouseTracker />
+        <hr/>
+        <LikeButton />
+        <hr/>
         <h1>Hello World</h1>
         <h2>Hello World</h2>
         <h3>Hello World</h3>
