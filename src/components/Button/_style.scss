@@ -33,15 +33,15 @@
 }
 
 .btn-primary{
-    @include button-style($primary,$primary,$white);
+    @include button-color($primary,$primary,$white);
 }
 
 .btn-danger{
-    @include button-style($danger,$danger,$white);
+    @include button-color($danger,$danger,$white);
 }
 
 .btn-default{
-    @include button-style($white,$gray-400,$body-color,
+    @include button-color($white,$gray-400,$body-color,
         $white,$primary,$primary);
 }
 
