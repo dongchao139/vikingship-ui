@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import ThemeContext from '../contexts';
 
 const LikeButton: React.FC = () => {
   const [like, setLike] = useState(0);
@@ -22,12 +23,14 @@ const LikeButton: React.FC = () => {
     if (domRef && domRef.current) {
       domRef.current.focus();
     }
-  })
+  });
+
+  const theme = useContext(ThemeContext);
 
   return (
     <>
       <input type='text' ref={domRef} />
-      <button onClick={() => {
+      <button style={{ color: theme.color, background: theme.background }} onClick={() => {
         setLike(like + 1); likeRef.current++;
       }}>{like} 赞</button>
       <button onClick={() => setOn(!on)}>{on ? 'ON' : 'OFF'} 赞</button>
