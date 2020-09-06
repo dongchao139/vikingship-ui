@@ -1,7 +1,7 @@
 .btn{
     display: inline-block;
-    @include button-size($btn-padding-y,$btn-padding-x,
-        $btn-font-size,$border-radius);
+    @include button-size($btn-padding-y, $btn-padding-x,
+        $btn-font-size, $border-radius);
     white-space: nowrap;
     text-align: center;
     margin: 0 $spacer/2;
@@ -13,7 +13,7 @@
     box-shadow: $btn-box-shadow;
     cursor: pointer;
     transition: $btn-transition;
-    &.disabled,&[disabled]{
+    &.disabled, &[disabled]{
         cursor: not-allowed;
         opacity: $btn-disabled-opacity;
         > * {
@@ -23,26 +23,26 @@
 }
 
 .btn-lg{
-    @include button-size($btn-padding-y-lg,$btn-padding-x-lg,
-        $btn-font-size-lg,$border-radius-lg);
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg,
+        $btn-font-size-lg, $border-radius-lg);
 }
 
 .btn-sm{
-    @include button-size($btn-padding-y-sm,$btn-padding-x-sm,
-        $btn-font-size-sm,$border-radius-sm);
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm,
+        $btn-font-size-sm, $border-radius-sm);
 }
 
 .btn-primary{
-    @include button-color($primary,$primary,$white);
+    @include button-color($primary, $primary, $white);
 }
 
 .btn-danger{
-    @include button-color($danger,$danger,$white);
+    @include button-color($danger, $danger, $white);
 }
 
 .btn-default{
-    @include button-color($white,$gray-400,$body-color,
-        $white,$primary,$primary);
+    @include button-color($white, $gray-400, $body-color,
+        $white, $primary, $primary);
 }
 
 .btn-link {
