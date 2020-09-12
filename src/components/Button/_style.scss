@@ -54,11 +54,11 @@
         color: $btn-link-hover-color;
         text-decoration: $link-hover-decoration;
     }
-    &:focus,&.focus{
+    &:focus, &.focus{
         color: $btn-link-hover-color;
         text-decoration: $link-hover-decoration;
     }
-    &[disabled],&.disabled{
+    &[disabled], &.disabled{
         color: $btn-link-disabled-color;
         pointer-events: none;
     }

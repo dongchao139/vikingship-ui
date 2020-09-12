@@ -1,0 +1,20 @@
+.alert {
+    display: block;
+    width: 300px;
+    background-color: $primary;
+    color: $white;
+    border-radius: $border-radius;
+    border: $border-width solid $primary;
+
+    position: relative;
+    > i:last-child {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        font-family: monospace;
+        font-style: normal;
+        font-size: $font-size-lg;
+        cursor: pointer;
+        font-weight: $font-weight-bold;
+    }
+}

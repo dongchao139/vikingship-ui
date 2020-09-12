@@ -3,12 +3,15 @@ import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import LikeButton from './hooks/LikeButton';
 import MouseTracker from './hooks/MouseTracker';
 import DogShow from './hooks/DogShow';
+import Alert, { AlertType } from './components/Alert/alert';
 
 
 function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
       <header>
+        <Alert title="这是标题" type={AlertType.DEFAULT}>this is alert!</Alert>
+        <hr />
         <Button btnType={ButtonType.Primary} className='customer-class' disabled>Hello World</Button>
         <Button onClick={() => { alert('aaa'); }}
           btnType={ButtonType.Primary}
