@@ -23,7 +23,7 @@ export interface IAlertProps {
  * </Alert>
  */
 const Alert = (props: IAlertProps) => {
-    const { title, closable = true, customClose = 'X', type } = props;
+    const { title, closable = true, customClose = '关闭', type } = props;
 
     const classes = classnames('alert', {
         [`alert-${type}`]: type
@@ -33,8 +33,8 @@ const Alert = (props: IAlertProps) => {
     return (
         visible ?
             <div className={classes}>
-                {title ? <h4>{title}</h4> : null}
-                <p>props.children</p>
+                {title ? <h4 className="alert-title">{title}</h4> : null}
+                <p className="alert-message">{props.children}</p>
                 {closable ? <i onClick={() => setVisible(false)}>{customClose}</i> : null}
             </div>
             : null

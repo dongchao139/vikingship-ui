@@ -8,6 +8,11 @@
     border-radius: $border-radius;
 }
 
+@mixin alert-color($background,$color) {
+    color: $color;
+    background-color: $background;
+}
+
 @mixin button-color(
     $background,
     $border-color,

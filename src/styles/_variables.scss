@@ -20,7 +20,7 @@ $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
 $red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
+$orange: #fd7e14 !default;
 $yellow:  #fadb14 !default;
 $green:   #52c41a !default;
 $teal:    #20c997 !default;
@@ -128,22 +128,20 @@ $blockquote-font-size:        $font-size-base * 1.25 !default;
 $hr-color:                    inherit !default;
 $hr-height:                   1px !default;
 $hr-opacity:                  .25 !default;
+$hr-margin-y:                 $spacer !default;
 
 $legend-margin-bottom:        .5rem !default;
 $legend-font-size:            1.5rem !default;
 $legend-font-weight:          null !default;
 
 $mark-padding:                .2em !default;
+$mark-bg:                     #fcf8e3 !default;
 
 $dt-font-weight:              $font-weight-bold !default;
 
 $nested-kbd-font-weight:      $font-weight-bold !default;
 
 $list-inline-padding:         .5rem !default;
-
-$mark-bg:                     #fcf8e3 !default;
-
-$hr-margin-y:                 $spacer !default;
 
 // Code
 
@@ -203,3 +201,22 @@ $btn-border-radius-sm: $border-radius-sm !default;
 $btn-border-radius-lg: $border-radius-lg !default;
 
 $btn-transition: all .15s ease-in-out !default;
+
+/**
+ * alert
+ */
+$alert-border-radius: .4rem !default;
+$alert-padding-y: .375rem !default;
+$alert-padding-x: .75rem !default;
+
+$alert-width: 30rem;
+$alert-line-height: $line-height-lg;
+
+$alert-title-font-size: $font-size-base * 1.2 !default;
+$alert-message-font-size: $font-size-base !default;
+
+$alert-icon-right: 1rem;
+$alert-icon-top: .5rem;
+
+$alert-font-weight: $font-weight-normal;
+$alert-font-size: $sub-sup-font-size;

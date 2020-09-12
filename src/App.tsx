@@ -10,7 +10,21 @@ function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
       <header>
-        <Alert title="这是标题" type={AlertType.DEFAULT}>this is alert!</Alert>
+        <Alert title="提示标题欧亲" type={AlertType.DEFAULT}>this is a long description!</Alert>
+        <hr />
+        <Alert type={AlertType.DEFAULT}>this is a long description!</Alert>
+        <hr />
+        <Alert title="提示标题欧亲" type={AlertType.SUCCESS}>this is a long description!</Alert>
+        <hr />
+        <Alert type={AlertType.SUCCESS}>this is a long description!</Alert>
+        <hr />
+        <Alert title="提示标题欧亲" type={AlertType.DANGER}>this is a long description!</Alert>
+        <hr />
+        <Alert type={AlertType.DANGER}>this is a long description!</Alert>
+        <hr />
+        <Alert title="提示标题欧亲" type={AlertType.WARNING}>this is a long description!</Alert>
+        <hr />
+        <Alert type={AlertType.WARNING}>this is a long description!</Alert>
         <hr />
         <Button btnType={ButtonType.Primary} className='customer-class' disabled>Hello World</Button>
         <Button onClick={() => { alert('aaa'); }}
