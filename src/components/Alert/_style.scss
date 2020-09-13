@@ -38,5 +38,5 @@
     @include alert-color($danger, $white);
 }
 .alert-warning {
-    @include alert-color($orange, $white);
+    @include alert-color($warning, $white);
 }
