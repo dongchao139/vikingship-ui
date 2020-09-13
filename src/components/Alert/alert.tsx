@@ -12,7 +12,7 @@ export interface IAlertProps {
     title?: string;
     closable?: boolean;
     customClose?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     type: AlertType;
 }
 
