@@ -18,7 +18,8 @@ const disabledProps: ButtonProps = {
 }
 
 /**
- * jest `react testing library`
+ * jest @testing-library/jest-dom @testing-library/react
+ * AAA模式：编排（Arrange），执行（Act），断言（Assert）。
  */
 describe('test Button component', () => {
     it('should render the correct default button', () => {
@@ -41,7 +42,7 @@ describe('test Button component', () => {
     });
     it('should render a link when btnType equals link and href is provided', () => {
         const wrapper = render(
-            <Button btnType={ButtonType.Link}href='http://dummyurl'>
+            <Button btnType={ButtonType.Link} href='http://dummyurl'>
                 Link
             </Button>
         );
