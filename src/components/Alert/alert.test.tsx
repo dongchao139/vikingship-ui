@@ -35,7 +35,7 @@ describe('test Alert component', () => {
     fireEvent.click(iconElement);
     expect(element).not.toBeInTheDocument();
   });
-  
+
   it('should render the correct component based on different props', () => {
     const wrapper = render(<Alert {...testSuccessAlertProp}>Nice</Alert>);
     const element = wrapper.queryByText('Nice');
