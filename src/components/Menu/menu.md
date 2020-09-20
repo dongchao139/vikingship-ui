@@ -11,6 +11,14 @@
         <Menu.Item disabled>
             disabled link
         </MenuItem>
+        <Menu.SubMenu title={"test"}>
+            <Menu.Item>
+                cool link
+            </Menu.Item>
+            <Menu.Item>
+                cool link
+            </Menu.Item>
+        </MenuItem>
         <Menu.Item>
             <a href="http://www.baidu.com">Baidu!</a>
         </MenuItem>

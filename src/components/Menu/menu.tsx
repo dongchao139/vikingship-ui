@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react'
 import classNames from 'classnames';
-import MenuItem, { MenuItemProps } from './menuItem';
+import { MenuItemProps } from './menuItem';
 
 type MenuMode = 'hrizontal' | 'vertical';
 type SelectCallback = (selectedIndex: number) => void;
@@ -18,12 +18,13 @@ interface IMenuContext {
   onSelect?: SelectCallback;
 }
 
-export const MenuContenxt = createContext<IMenuContext>({ activeIndex: 0 });
+export const MenuContext = createContext<IMenuContext>({ activeIndex: 0 });
 
 const Menu: React.FC<MenuProps> = (props) => {
   const { defaultIndex, className, mode, style, children, onSelect } = props;
   const classes = classNames('viking-menu', className, {
-    'menu-vertical': mode === 'vertical'
+    'menu-vertical': mode === 'vertical',
+    'menu-horizontal': mode !== 'vertical',
   });
 
   const [currentActive, setActive] = useState(defaultIndex);
@@ -42,7 +43,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
   return (
     <ul className={classes} style={style} data-testid="test-menu">
-      <MenuContenxt.Provider value={passedContent}>
+      <MenuContext.Provider value={passedContent}>
         {React.Children.map(children, (child, index) => {
           const childElement = child as React.FunctionComponentElement<MenuItemProps>;
           if (childElement.type.displayName === 'MenuItem') {
@@ -51,7 +52,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           console.error("Warning: Menu has a child whitch is not a MenuItem Component");
           return null;
         })}
-      </MenuContenxt.Provider>
+      </MenuContext.Provider>
     </ul>
   )
 };

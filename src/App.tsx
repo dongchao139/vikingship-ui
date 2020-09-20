@@ -6,6 +6,7 @@ import DogShow from './hooks/DogShow';
 import Alert, { AlertType } from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/submenu';
 
 
 function App() {
@@ -19,6 +20,17 @@ function App() {
           <MenuItem disabled={true}>
             cool link2
           </MenuItem>
+          <SubMenu title="下拉菜单">
+            <MenuItem>
+              cool link3
+            </MenuItem>
+            <MenuItem>
+              cool link3
+            </MenuItem>
+            <MenuItem>
+              cool link3
+            </MenuItem>
+          </SubMenu>
           <MenuItem>
             cool link3
           </MenuItem>
@@ -31,6 +43,17 @@ function App() {
           <MenuItem disabled={true}>
             cool link2
           </MenuItem>
+          <SubMenu title="下拉菜单">
+            <MenuItem>
+              cool link3
+            </MenuItem>
+            <MenuItem>
+              cool link3
+            </MenuItem>
+            <MenuItem>
+              cool link3
+            </MenuItem>
+          </SubMenu>
           <MenuItem>
             cool link3
           </MenuItem>

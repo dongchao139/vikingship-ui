@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import classNames from 'classnames';
-import { MenuContenxt } from './menu';
+import { MenuContext } from './menu';
 
 export interface MenuItemProps {
   index?: number;
@@ -12,7 +12,7 @@ export interface MenuItemProps {
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, className, style, children } = props;
 
-  const context = useContext(MenuContenxt);
+  const context = useContext(MenuContext);
 
   const classes = classNames('menu-item', className, {
     'is-disabled': disabled,
