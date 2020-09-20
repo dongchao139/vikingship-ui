@@ -4,12 +4,38 @@ import LikeButton from './hooks/LikeButton';
 import MouseTracker from './hooks/MouseTracker';
 import DogShow from './hooks/DogShow';
 import Alert, { AlertType } from './components/Alert/alert';
+import Menu from './components/Menu/menu';
+import MenuItem from './components/Menu/menuItem';
 
 
 function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
       <header>
+        <Menu defaultIndex={0} onSelect={i => { }}>
+          <MenuItem>
+            cool link1
+          </MenuItem>
+          <MenuItem disabled={true}>
+            cool link2
+          </MenuItem>
+          <MenuItem>
+            cool link3
+          </MenuItem>
+        </Menu>
+        <hr />
+        <Menu defaultIndex={0} onSelect={i => { }} mode="vertical">
+          <MenuItem>
+            cool link1
+          </MenuItem>
+          <MenuItem disabled={true}>
+            cool link2
+          </MenuItem>
+          <MenuItem>
+            cool link3
+          </MenuItem>
+        </Menu>
+        <hr />
         <Alert title="提示标题欧亲" type={AlertType.DEFAULT}>this is a long description!</Alert>
         <hr />
         <Alert type={AlertType.DEFAULT}>this is a long description!</Alert>
