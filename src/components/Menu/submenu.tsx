@@ -4,7 +4,7 @@ import {MenuContext} from './menu';
 import { MenuItemProps } from './menuItem';
 
 export interface SubMenuProps {
-    index?: number;
+    index?: string;
     title: string;
     className?: string;
 }
@@ -12,8 +12,10 @@ export interface SubMenuProps {
 const SubMenu: React.FC<SubMenuProps> = (props) => {
     const {index, title, children, className} = props;
     const context = useContext(MenuContext);
+    const isOpen: boolean = index && context.mode === 'vertical' 
+        && context.defaultOpenSubs.includes(index);
 
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(isOpen);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -44,8 +46,11 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     const childrenComponent = React.Children.map(children, (child, i) => {
         const childElement = child as React.FunctionComponentElement<MenuItemProps>;
         if (childElement.type.displayName === 'MenuItem') {
-            return childElement;
+            return React.cloneElement(childElement, {
+                index: `${index}-${i}`
+            });
         }
+        console.error("Warning: Menu has a child whitch is not a MenuItem Component");
         return null;
     });
     const subMenuClasses = classNames('viking-submenu', {

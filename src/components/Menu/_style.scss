@@ -9,9 +9,6 @@
         padding: $menu-item-padding-y $menu-item-padding-x;
         cursor: pointer;
         transition: $menu-transition;
-        &:hover, &:focus {
-            text-decoration: none;
-        }
         &.is-active, &:hover {
             color: $menu-item-active-color;
         }
@@ -51,7 +48,7 @@
     border-bottom: $menu-border-width solid $menu-border-color;
     >.menu-item {
         border-bottom: $menu-item-active-border-width solid transparent;
-        &.is-active, &:hover {
+        &.is-active {
             border-bottom: $menu-item-active-border-width solid 
                 $menu-item-active-color;
         }
@@ -64,6 +61,14 @@
         left: 0;
         border: $menu-border-width solid $menu-border-color;
         // box-shadow: $submenu-box-shadow;
+        >.menu-item {
+            border-left: $menu-item-active-border-width solid transparent;
+            &.is-active {
+                border-bottom: 0px;
+                border-left: $menu-item-active-border-width 
+                    solid $menu-item-active-color;
+            }
+        }
     }
 }
 
@@ -72,9 +77,9 @@
     border-bottom: 0px;
     margin: 10px 20px;
     border-right: $menu-border-width solid $menu-border-color;
-    >.menu-item {
+    .menu-item {
         border-left: $menu-item-active-border-width solid transparent;
-        &.is-active, &:hover {
+        &.is-active {
             border-bottom: 0px;
             border-left: $menu-item-active-border-width 
                 solid $menu-item-active-color;

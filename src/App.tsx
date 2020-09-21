@@ -13,7 +13,7 @@ function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
       <header>
-        <Menu defaultIndex={0} onSelect={i => console.log(i)}>
+        <Menu defaultIndex={'0'} onSelect={i => console.log(i)}>
           <MenuItem>
             cool link1
           </MenuItem>
@@ -36,7 +36,8 @@ function App() {
           </MenuItem>
         </Menu>
         <hr />
-        <Menu defaultIndex={0} onSelect={i => console.log(i)} mode="vertical">
+        <Menu defaultIndex={'0'} onSelect={i => console.log(i)} 
+              mode="vertical" defaultOpenSubs= {['2']}>
           <MenuItem>
             cool link1
           </MenuItem>
