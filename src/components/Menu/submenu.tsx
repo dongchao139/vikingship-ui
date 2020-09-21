@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import classNames from 'classnames';
 import {MenuContext} from './menu';
 import { MenuItemProps } from './menuItem';
@@ -13,6 +13,13 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     const {index, title, children, className} = props;
     const context = useContext(MenuContext);
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setMenuOpen(!menuOpen);
+    }
+
     const classes = classNames('menu-item submenu-item', className, {
         'is-active': context.activeIndex === index
     });
@@ -24,13 +31,16 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         }
         return null;
     });
+    const subMenuClasses = classNames('viking-submenu', {
+        'menu-opened': menuOpen
+    });
 
     return (
         <li key={index} className={classes}>
-            <div className="submenu-title">
+            <div className="submenu-title" onClick={handleClick}>
                 {title}
             </div>
-            <ul className="viking-submenu">
+            <ul className={subMenuClasses}>
                 {childrenComponent}
             </ul>
         </li>
