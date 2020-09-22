@@ -37,7 +37,9 @@ function App() {
         </Menu>
         <hr />
         <Menu defaultIndex={'0'} onSelect={i => console.log(i)} 
-              mode="vertical" defaultOpenSubs= {['2']}>
+              mode="vertical" 
+              // defaultOpenSubs= {['2']}
+              >
           <MenuItem>
             cool link1
           </MenuItem>
