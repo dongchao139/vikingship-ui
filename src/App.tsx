@@ -7,12 +7,24 @@ import Alert, { AlertType } from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/submenu';
-
+import Tabs from './components/Tabs/tabs';
 
 function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
       <header>
+      <Tabs defaultIndex={0} styleType="underline" onSelect={() => {}}>
+        {/* <TabItem label="card1">this is card one</TabItem>
+        <TabItem label="card2">this is content two</TabItem>
+        <TabItem label="disabled">this is content three</TabItem> */}
+      </Tabs>
+        <hr />
+      <Tabs defaultIndex={0} styleType="outline" onSelect={() => {}}>
+        {/* <TabItem label="card1">this is card one</TabItem>
+        <TabItem label="card2">this is content two</TabItem>
+        <TabItem label="disabled">this is content three</TabItem> */}
+      </Tabs>
+        <hr />
         <Menu defaultIndex={'0'} onSelect={i => console.log(i)}>
           <MenuItem>
             cool link1
