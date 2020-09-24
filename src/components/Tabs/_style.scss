@@ -40,7 +40,7 @@
             border-style: solid;
             border-color: transparent transparent $tabs-border-color;
             &.tabs-label-active {
-                border-bottom-width: 2.5px;
+                border-bottom-width: $tabs-label-active-border-bottom-width;
                 color: $tabs-label-active-color;
                 border-color: $tabs-border-color $tabs-border-color $white;
                 box-shadow: $tabs-label-active-box-shadow;
