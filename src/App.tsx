@@ -8,10 +8,13 @@ import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/submenu';
 import Tabs from './components/Tabs/tabs';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
+      <FontAwesomeIcon icon={faCoffee} size="10x"/>
       <header>
       <Tabs defaultIndex={0} styleType="underline" onSelect={() => {}}>
         {/* <TabItem label="card1">this is card one</TabItem>
