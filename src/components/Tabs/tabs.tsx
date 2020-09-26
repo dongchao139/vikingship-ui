@@ -1,39 +1,57 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import classNames from 'classnames';
+import {TabsItemProps} from "./tabs-item";
 
 type TabStyle = "underline" | "outline";
 
 export interface TabProps {
-    defaultIndex:number;
-    styleType: TabStyle;
-    onSelect:(selectedIndex: number) => void;
-    className: string;
+  defaultIndex?: number;
+  styleType?: TabStyle;
+  onSelect?: (selectedIndex: number) => void;
+  className?: string;
 }
 
-function Tabs(props) {
-    const classes = classNames('tabs-nav',{
-        'tabs-underline': props.styleType === "underline",
-        'tabs-outline': props.styleType === "outline"
-    });
+const Tabs: React.FC<TabProps> = (props) => {
+  const classes = classNames('tabs-nav', props.className, {
+    'tabs-underline': props.styleType === "underline",
+    'tabs-outline': props.styleType === "outline"
+  });
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    return (
-        <div>
-            <nav className={classes}>
-                <ul className="tabs-ul">
-                    <li className="tabs-label tabs-label-active">label1</li>
-                    <li className="tabs-label">label2</li>
-                    <li className="tabs-label tabs-label-disabled">label3</li>
-                </ul>
-            </nav>
-            <div className="tabs-content tabs-content-active">content1</div>
-            <div className="tabs-content">content2</div>
-            <div className="tabs-content">content3</div>
-        </div>
-    )
+  function handleClick(index) {
+    setActiveIndex(index);
+    if (typeof props.onSelect === 'function') {
+      props.onSelect(index);
+    }
+  }
+
+  return (
+    <div>
+      <nav className={classes}>
+        <ul className="tabs-ul">
+          {React.Children.map(props.children, (child, index) => {
+            const childElement = child as React.FunctionComponentElement<TabsItemProps>;
+            const itemLabelClasses = classNames('tabs-label', {
+              'tabs-label-active': activeIndex === index,
+              'tabs-label-disabled': childElement.props.disabled
+            });
+            return (
+              <li key={index} className={itemLabelClasses} onClick={() => handleClick(index)}>
+                {childElement.props.label}
+              </li>)
+          })}
+        </ul>
+      </nav>
+      {React.Children.map(props.children, (child, index) => {
+        const childElement = child as React.FunctionComponentElement<TabsItemProps>;
+        return React.cloneElement(childElement, {isActive: activeIndex === index});
+      })}
+    </div>
+  )
 }
 
 Tabs.defaultProps = {
-    defaultIndex: '0',
-    styleType: 'underline'
-  }
+  defaultIndex: 0,
+  styleType: 'underline'
+}
 export default Tabs;
