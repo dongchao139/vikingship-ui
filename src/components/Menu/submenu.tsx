@@ -46,7 +46,9 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   } : {};
 
   const classes = classNames('menu-item submenu-item', className, {
-    'is-active': context.activeIndex === index
+    'is-active': context.activeIndex === index,
+    'is-opened': menuOpen,
+    'is-vertical': context.mode === 'vertical'
   });
 
   const childrenComponent = React.Children.map(children, (child, i) => {
@@ -56,7 +58,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         index: `${index}-${i}`
       });
     }
-    console.error("Warning: Menu has a child whitch is not a MenuItem Component");
+    console.error("Warning: Menu has a child witch is not a MenuItem Component");
     return null;
   });
   const subMenuClasses = classNames('viking-submenu', {
