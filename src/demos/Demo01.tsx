@@ -1,26 +1,11 @@
 import React from 'react'
-import Alert, {AlertType} from "../components/Alert/alert";
 import Button, {ButtonSize, ButtonType} from "../components/Button/button";
+import Demo011 from "./Demo01-1";
 
 function Demo01(props) {
   return (
     <>
-      <hr />
-      <Alert title="提示标题欧亲" type={AlertType.DEFAULT}>this is a long description!</Alert>
-      <hr/>
-      <Alert type={AlertType.DEFAULT}>this is a long description!</Alert>
-      <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.SUCCESS}>this is a long description!</Alert>
-      <hr/>
-      <Alert type={AlertType.SUCCESS}>this is a long description!</Alert>
-      <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.DANGER}>this is a long description!</Alert>
-      <hr/>
-      <Alert type={AlertType.DANGER}>this is a long description!</Alert>
-      <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.WARNING}>this is a long description!</Alert>
-      <hr/>
-      <Alert type={AlertType.WARNING}>this is a long description!</Alert>
+      <Demo011 />
       <hr/>
       <Button btnType={ButtonType.Primary} className='customer-class' disabled>Hello World</Button>
       <Button onClick={() => {
