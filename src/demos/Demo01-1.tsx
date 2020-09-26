@@ -1,7 +1,7 @@
 import React from "react";
 import Alert, {AlertType} from "../components/Alert/alert";
 
-function Demo011(props) {
+function Demo011(_props) {
   return (
     <>
       <hr />

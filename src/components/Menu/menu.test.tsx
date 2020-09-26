@@ -24,7 +24,7 @@ const testProps3: MenuProps = {
     defaultOpenSubs: ['3']
 }
 
-const func =(props)=> {
+const func = (props)=> {
     return (
         <Menu {...props}>
           <MenuItem>

@@ -3,7 +3,7 @@ import MouseTracker from "../hooks/MouseTracker";
 import LikeButton from "../hooks/LikeButton";
 import DogShow from "../hooks/DogShow";
 
-function Demo(props) {
+function Demo(_props) {
   return (
     <>
       <MouseTracker />

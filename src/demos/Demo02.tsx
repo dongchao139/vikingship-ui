@@ -3,7 +3,7 @@ import Menu from "../components/Menu/menu";
 import MenuItem from "../components/Menu/menuItem";
 import SubMenu from "../components/Menu/submenu";
 
-function Demo02(props) {
+function Demo02(_props) {
   return (
     <>
       <hr/>

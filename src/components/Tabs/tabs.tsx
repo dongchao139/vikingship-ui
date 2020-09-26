@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import classNames from 'classnames';
 import {TabsItemProps} from "./tabs-item";
 
@@ -18,7 +18,10 @@ const Tabs: React.FC<TabProps> = (props) => {
   });
   const [activeIndex, setActiveIndex] = useState(0);
 
-  function handleClick(index) {
+  function handleClick(index: number, disabled: boolean): void {
+    if (disabled) {
+      return;
+    }
     setActiveIndex(index);
     if (typeof props.onSelect === 'function') {
       props.onSelect(index);
@@ -36,7 +39,7 @@ const Tabs: React.FC<TabProps> = (props) => {
               'tabs-label-disabled': childElement.props.disabled
             });
             return (
-              <li key={index} className={itemLabelClasses} onClick={() => handleClick(index)}>
+              <li key={index} className={itemLabelClasses} onClick={() => handleClick(index, childElement.props.disabled)}>
                 {childElement.props.label}
               </li>)
           })}
