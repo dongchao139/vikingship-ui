@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {MenuContext} from './menu';
 import {MenuItemProps} from './menuItem';
 import Icon from "../icon/icon";
-import {CSSTransition} from "react-transition-group";
+import Transition from "../Transition/transition";
 
 export interface SubMenuProps {
   index?: string;
@@ -71,7 +71,12 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         {title}
         <Icon icon="arrow-down" className="arrow-icon"/>
       </div>
-      <CSSTransition in={menuOpen} timeout={300} classNames="zoom-in-top"
+      <Transition in={menuOpen} timeout={300} animation="zoom-in-top">
+        <ul className={subMenuClasses}>
+          {childrenComponent}
+        </ul>
+      </Transition>
+      {/*<CSSTransition in={menuOpen} timeout={300} classNames="zoom-in-top"
                      // 初次加载时也有动画
                      appear
                     // 进入时挂载, 离开时卸载
@@ -80,7 +85,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         <ul className={subMenuClasses}>
           {childrenComponent}
         </ul>
-      </CSSTransition>
+      </CSSTransition>*/}
     </li>
   )
 }

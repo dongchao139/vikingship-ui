@@ -1,24 +1,4 @@
-.zoom-in-top-enter {
-  opacity: 0;
-  transform: scaleY(0);
-}
-
-.zoom-in-top-enter-active {
-  opacity: 1;
-  transform: scaleY(1);
-  transform-origin: center top;
-  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms,
-      opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
-}
-
-.zoom-in-top-exit {
-  opacity: 1;
-}
-
-.zoom-in-top-exit-active {
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: center top;
-  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms,
-      opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
-}
+@include zoom-animation('top', scaleY(0), scaleY(1), center top);
+@include zoom-animation('left', scale(0.45, 0.45), scale(1, 1), left top);
+@include zoom-animation('right', scale(0.45, 0.45), scale(1, 1), right top);
+@include zoom-animation('bottom', scaleY(0), scaleY(1), center bottom);
