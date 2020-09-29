@@ -46,7 +46,7 @@
     }
     .viking-submenu {
         flex-direction: column;
-        display: none;
+        // 不用display控制是否显示, 用CSSTransition的属性控制元素是否存在
         list-style: none;
         padding-left: 0;
         white-space: nowrap;
@@ -61,7 +61,6 @@
         }
     }
     .viking-submenu.menu-opened {
-        display: block;
     }
 }
 

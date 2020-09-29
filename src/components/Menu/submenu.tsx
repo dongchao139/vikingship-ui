@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {MenuContext} from './menu';
 import {MenuItemProps} from './menuItem';
 import Icon from "../icon/icon";
-import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
+import {CSSTransition} from "react-transition-group";
 
 export interface SubMenuProps {
   index?: string;
@@ -69,11 +69,18 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     <li key={index} className={classes} {...hoverEvents}>
       <div className="submenu-title" {...clickEvents}>
         {title}
-        <Icon icon={faAngleDown} className="arrow-icon"/>
+        <Icon icon="arrow-down" className="arrow-icon"/>
       </div>
-      <ul className={subMenuClasses}>
-        {childrenComponent}
-      </ul>
+      <CSSTransition in={menuOpen} timeout={300} classNames="zoom-in-top"
+                     // 初次加载时也有动画
+                     appear
+                    // 进入时挂载, 离开时卸载
+                     unmountOnExit={true}
+      >
+        <ul className={subMenuClasses}>
+          {childrenComponent}
+        </ul>
+      </CSSTransition>
     </li>
   )
 }

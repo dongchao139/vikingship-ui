@@ -3,14 +3,13 @@ import Demo from './demos/Demo';
 import Demo01 from './demos/Demo01';
 import Demo02 from "./demos/Demo02";
 import Demo03 from "./demos/Demo03";
-import { faCoffee, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Icon from './components/icon/icon';
 
 function App() {
   return (
     <div style={{ width: '85%', margin: '2rem auto' }}>
-      <Icon theme="primary" icon={faCoffee} size="6x"/>
-      <Icon theme="primary" icon={faArrowDown} size="6x"/>
+      <Icon theme="primary" icon="coffee" size="6x"/>
+      <Icon theme="primary" icon="arrow-down" size="6x"/>
       <header>
         <Demo03 />
         <Demo02 />
