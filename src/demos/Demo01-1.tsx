@@ -11,7 +11,7 @@ function Demo011(_props) {
       <hr/>
       <Alert title="提示标题欧亲" type="success">this is a long description!</Alert>
       <hr/>
-      <Alert type="primary">this is a long description!</Alert>
+      <Alert type="success">this is a long description!</Alert>
       <hr/>
       <Alert title="提示标题欧亲" type="danger">this is a long description!</Alert>
       <hr/>
