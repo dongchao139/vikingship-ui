@@ -5,21 +5,21 @@ function Demo011(_props) {
   return (
     <>
       <hr />
-      <Alert title="提示标题欧亲" type={AlertType.DEFAULT}>this is a long description!</Alert>
+      <Alert title="提示标题欧亲" type="primary">this is a long description!</Alert>
       <hr/>
-      <Alert type={AlertType.DEFAULT}>this is a long description!</Alert>
+      <Alert type="primary">this is a long description!</Alert>
       <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.SUCCESS}>this is a long description!</Alert>
+      <Alert title="提示标题欧亲" type="success">this is a long description!</Alert>
       <hr/>
-      <Alert type={AlertType.SUCCESS}>this is a long description!</Alert>
+      <Alert type="primary">this is a long description!</Alert>
       <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.DANGER}>this is a long description!</Alert>
+      <Alert title="提示标题欧亲" type="danger">this is a long description!</Alert>
       <hr/>
-      <Alert type={AlertType.DANGER}>this is a long description!</Alert>
+      <Alert type="danger">this is a long description!</Alert>
       <hr/>
-      <Alert title="提示标题欧亲" type={AlertType.WARNING}>this is a long description!</Alert>
+      <Alert title="提示标题欧亲" type="warning">this is a long description!</Alert>
       <hr/>
-      <Alert type={AlertType.WARNING}>this is a long description!</Alert>
+      <Alert type="warning">this is a long description!</Alert>
     </>
   )
 }
