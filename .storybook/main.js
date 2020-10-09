@@ -1,4 +1,4 @@
-// npx -p @storybook/cli sb init
+// 在项目的根目录下执行初始化 npx -p @storybook/cli sb init
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",

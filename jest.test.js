@@ -1,3 +1,6 @@
+// create-react-app 默认添加了jest
+// npx jest jest.test.js --watch 执行测试
+
 test('test common matcher', () => {
   expect(2 + 2).toBe(4);
   expect(2 + 2).not.toBe(5);

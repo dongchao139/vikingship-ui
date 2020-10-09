@@ -1,19 +1,19 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Alert, { IAlertProps, AlertType } from './alert';
+import Alert, { IAlertProps } from './alert';
 
 const testAlertProp: IAlertProps = {
   title: "testAlert",
   closable: true,
   customClose: "关闭",
-  type: AlertType.DEFAULT
+  type: "primary"
 }
 
 
 const testSuccessAlertProp: IAlertProps = {
   closable: true,
   customClose: "关闭",
-  type: AlertType.SUCCESS
+  type: "success"
 }
 
 describe('test Alert component', () => {

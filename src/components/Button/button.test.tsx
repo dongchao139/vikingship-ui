@@ -18,7 +18,17 @@ const disabledProps: ButtonProps = {
 }
 
 /**
- * jest @testing-library/jest-dom @testing-library/react
+ * 依赖: jest @testing-library/jest-dom @testing-library/react
+ *
+ * jest: (create-react-app 默认添加了jest)
+ *  npm install --save-dev jest
+ *
+ * @testing-library/jest-dom: (create-react-app 3.3.0版本默认已添加)
+ *  npm install --save-dev @testing-library/jest-dom
+ *
+ * @testing-library/react: (create-react-app 3.3.0版本默认已添加)
+ *  npm install --save-dev @testing-library/react
+ *
  * AAA模式：编排（Arrange），执行（Act），断言（Assert）。
  */
 describe('test Button component', () => {
