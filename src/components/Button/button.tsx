@@ -3,7 +3,8 @@ import classnames from 'classnames';
 
 export enum ButtonSize {
   Large = 'lg',
-  Small = 'sm'
+  Small = 'sm',
+  Default = 'df'
 }
 
 export enum ButtonType {
@@ -49,8 +50,11 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
  * </Button>
  */
 const Button: React.FC<ButtonProps> = (props) => {
-  const { btnType, className, disabled, size,
-    children, href, ...restProps } = props;
+  const {
+    btnType = ButtonType.Primary, className, disabled,
+    size = ButtonSize.Default,
+    children, href, ...restProps
+  } = props;
   // btn, btn-lg btn-primary
   const classes = classnames('btn', className, {
     [`btn-${btnType}`]: btnType,

@@ -13,6 +13,7 @@
         font-size: $alert-title-font-size;
     }
     p.alert-message {
+        margin-top: 0;
         margin-bottom: 0;
         line-height: $alert-line-height;
         font-size: $alert-message-font-size;

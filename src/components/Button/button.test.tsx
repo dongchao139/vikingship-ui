@@ -28,6 +28,7 @@ describe('test Button component', () => {
 
         expect(element).toBeInTheDocument();
         expect(element.tagName).toEqual('BUTTON');
+        // @ts-ignore
         expect(element.disabled).toBeFalsy();
         expect(element).toHaveClass('btn btn-default');
         fireEvent.click(element);
@@ -57,6 +58,7 @@ describe('test Button component', () => {
         const element = wrapper.queryByText('Nice');
 
         expect(element).toBeInTheDocument();
+        // @ts-ignore
         expect(element.disabled).toBeTruthy();
         fireEvent.click(element);
         expect(disabledProps.onClick).not.toHaveBeenCalled();
