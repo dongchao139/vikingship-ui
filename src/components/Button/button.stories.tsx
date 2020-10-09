@@ -1,12 +1,6 @@
 import React from "react";
 import {Story, Meta} from "@storybook/react/types-6-0";
 import Button, {ButtonProps, ButtonSize} from "./button";
-import {
-  Title, Description,
-  Primary　as PrimaryBlock,
-  ArgsTable, Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
 
 export default {
   title: 'New/Button',
@@ -69,16 +63,9 @@ export default {
   },
   parameters: {
     docs: {
-      page: () => (
-        <>
-          <Title>Button</Title>
-          <Description>This is a button component. It can have multiple props
-            like size, type, disable.</Description>
-          <PrimaryBlock />
-          <ArgsTable story={PRIMARY_STORY} />
-          <Stories />
-        </>
-      ),
+      description: {
+        component: 'This is a button component. It can have multiple props like size, type, disable.'
+      }
     }
   }
 } as Meta;

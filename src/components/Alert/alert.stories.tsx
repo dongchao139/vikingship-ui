@@ -1,12 +1,6 @@
 import React from "react";
 import {Story, Meta} from "@storybook/react/types-6-0";
 import Alert, {IAlertProps} from "./alert";
-import {
-  Title, Description,
-  Primary　as PrimaryBlock,
-  ArgsTable, Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
 
 export default {
   title: 'New/Alert',
@@ -75,17 +69,9 @@ export default {
   },
   parameters: {
     docs: {
-      page: () => (
-        <>
-          <Title>Alert</Title>
-          <Description>This is an alert component.
-            It can have multiple props
-            like title, type, closeable,customClose.</Description>
-          <PrimaryBlock />
-          <ArgsTable story={PRIMARY_STORY} />
-          <Stories />
-        </>
-      ),
+      description: {
+        component: 'This is an alert component. It can have multiple props like title, type, closeable,customClose.'
+      }
     }
   }
 } as Meta;
