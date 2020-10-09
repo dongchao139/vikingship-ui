@@ -1,3 +1,4 @@
+// 引入样式文件
 import "../src/styles/index.scss";
 
 export const parameters = {
