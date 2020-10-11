@@ -4,24 +4,31 @@ import classNames from "classnames";
 import Icon from "../icon/icon";
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
+  /**
+   * disabled
+   */
   disabled?: boolean;
+  /**
+   * size
+   */
   size?: 'df' | 'lg' | 'sm';
+  /**
+   * icon
+   */
   icon?: IconProp;
+  /**
+   * prepend
+   */
   prepend?: string | ReactElement;
+  /**
+   * append
+   */
   append?: string | ReactElement;
 }
 
 /**
- * <Input
- *   disabled
- *   size
- *   icon
- *   prepend
- *   append
- * />
- * .input .input-disabled .input-lg/.input-sm
- * @param props
- * @constructor
+ * .viking-input-wrapper .is-disabled .input-size-lg/.input-size-sm
+ * .input-group .input-group-append .input-group-prepend .input-inner
  */
 export const Input: React.FC<InputProps> = (props) => {
   const {disabled, size, icon, prepend, append, style, ...restProps} = props;
