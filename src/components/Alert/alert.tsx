@@ -6,34 +6,51 @@ import Icon from "../icon/icon";
 export type AlertType = 'success' | 'primary' | 'warning' | 'danger';
 
 export interface IAlertProps {
+  /**
+   * the title
+   */
   title?: string;
+  /**
+   * whether this alert can close.
+   */
   closable?: boolean;
+  /**
+   * the close icon
+   */
   customClose?: string;
+  /**
+   * onClose action
+   */
   onClose?: (() => void);
+  /**
+   * the description of this alert
+   */
   children?: React.ReactNode;
+  /**
+   * alert type
+   */
   type: AlertType;
 }
 
 /**
- * <Alert title="提示标题欧亲" closable={true}, customClose={'x' | '关闭'}
- *      type={AlertType.SUCCESS}>
- *  this is alert!
- * </Alert>
+ * This is an alert component. It can have multiple props like title, type, closeable,customClose.
  */
-const Alert: React.FC<IAlertProps> = (props: IAlertProps) => {
-  const {title, closable = true, type} = props;
+export const Alert: React.FC<IAlertProps> = (
+  {
+    title, closable = true,
+    type = 'primary',
+    customClose, onClose, children
+  }) => {
 
-  const customClose = props.customClose
-    || <Icon icon="times" className="window-close" size='lg'/>;
-
+  const customCloseP = customClose || <Icon icon="times" className="window-close" size='lg'/>
   const classes = classnames('alert', {
     [`alert-${type}`]: type
   });
 
   const handleClick = () => {
     setVisible(false);
-    if (props.onClose) {
-      props.onClose();
+    if (onClose) {
+      onClose();
     }
   }
 
@@ -42,11 +59,9 @@ const Alert: React.FC<IAlertProps> = (props: IAlertProps) => {
     <Transition in={visible} animation="zoom-in-left" timeout={300} wrapper={true}>
       <div className={classes}>
         {title ? <h4 className="alert-title">{title}</h4> : null}
-        <p className="alert-message">{props.children}</p>
-        {closable ? <i onClick={handleClick}>{customClose}</i> : null}
+        <p className="alert-message">{children}</p>
+        {closable ? <i onClick={handleClick}>{customCloseP}</i> : null}
       </div>
     </Transition>
   );
 }
-
-export default Alert;

@@ -1,6 +1,7 @@
 import React from "react";
 import {Story, Meta} from "@storybook/react/types-6-0";
-import Button, {ButtonProps, ButtonSize} from "./button";
+// export default Button 方式的导出, 会导致识别ts注释失败
+import {Button, ButtonProps, ButtonSize} from "./button";
 
 export default {
   title: 'New/Button',
@@ -8,26 +9,15 @@ export default {
   // decorators: [(Story) => <div className="container"><Story/></div>],
   argTypes: {
     btnType: {
-      type: 'string',
-      defaultValue: 'default',
-      description: 'the type of this button',
       table: {
-        type: {
-          summary: 'string',
-        },
         defaultValue: {
           summary: 'default',
           detail: 'default button. white background, gray border'
         },
       },
-      control: {
-        type: 'select',
-        options: ['primary','default','danger', 'link']
-      },
     },
     size: {
       type: 'string',
-      defaultValue: 'df',
       description: 'the size of this button',
       table: {
         type: {
@@ -42,32 +32,8 @@ export default {
         options: ['sm','df','lg']
       },
     },
-    disabled: {
-      type: 'bool',
-      defaultValue: false,
-      description: 'whether the button can be clicked',
-      table: {
-        type: {
-          summary: 'boolean',
-        },
-        defaultValue: {
-          summary: 'false',
-          detail: 'disabled button cannot be clicked'
-        },
-      },
-      control: {
-        type: 'boolean'
-      },
-    },
     onClick: { action: 'clicked' }
   },
-  parameters: {
-    docs: {
-      description: {
-        component: 'This is a button component. It can have multiple props like size, type, disable.'
-      }
-    }
-  }
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args}>

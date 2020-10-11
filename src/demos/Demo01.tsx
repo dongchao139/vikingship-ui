@@ -1,5 +1,5 @@
 import React from 'react'
-import Button, {ButtonSize, ButtonType} from "../components/Button/button";
+import {Button, ButtonSize, ButtonType} from "../components/Button/button";
 import Demo011 from "./Demo01-1";
 
 function Demo01(_props) {
