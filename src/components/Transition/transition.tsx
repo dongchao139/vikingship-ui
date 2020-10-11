@@ -23,8 +23,8 @@ const Transition: React.FC<TransitionProps> = (props) => {
 }
 
 Transition.defaultProps = {
-  unmountOnExit: true,
-  appear: true
+  unmountOnExit: true,// 进入时挂载, 离开时卸载
+  appear: true// 初次加载时也有动画
 }
 
 export default Transition;

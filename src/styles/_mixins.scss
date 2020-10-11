@@ -47,12 +47,14 @@
     $scaleEnd: scaleY(1),
     $origin: center top
 ) {
-    .zoom-in-#{$direction}-enter {
+    .zoom-in-#{$direction}-enter,
+    .zoom-in-#{$direction}-appear {
         opacity: 0;
         transform: $scaleStart;
     }
 
-    .zoom-in-#{$direction}-enter-active {
+    .zoom-in-#{$direction}-enter-active,
+    .zoom-in-#{$direction}-appear-active {
         opacity: 1;
         transform: $scaleEnd;
         transform-origin: $origin;
