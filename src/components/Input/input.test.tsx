@@ -10,14 +10,13 @@ const defaultProps: InputProps = {
 describe('test input component', () => {
   it('should render the correct default input', function () {
     const wrapper = render(<Input {...defaultProps} />)
-    const testNode = wrapper.getByPlaceholderText('test-input');
+    const testNode = wrapper.getByPlaceholderText('test-input')  as HTMLInputElement;
 
     expect(testNode).toBeInTheDocument();
     expect(testNode).toHaveClass('viking-input-inner');
 
     fireEvent.change(testNode, {target: {value: '23'}});
     expect(defaultProps.onChange).toHaveBeenCalled();
-    // @ts-ignore
     expect(testNode.value).toEqual('23');
   });
   it('should render the disabled input on disabled property', function () {
@@ -30,7 +29,7 @@ describe('test input component', () => {
     const testContainer = wrapper.container.querySelector('.viking-input-wrapper')
     expect(testContainer).toHaveClass('input-size-lg')
   });
-  it('should render prepand and append element on prepand/append property', function () {
+  it('should render prepend and append element on prepend/append property', function () {
     const wrapper = render(<Input placeholder="pend" prepend="https://" append=".com" />);
     const testContainer = wrapper.container.querySelector(".viking-input-wrapper");
 
