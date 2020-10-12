@@ -24,6 +24,11 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
    * append
    */
   append?: string | ReactElement;
+
+  /**
+   * the placeholder
+   */
+  placeholder: string;
 }
 
 /**
@@ -31,7 +36,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
  * .input-group .input-group-append .input-group-prepend .input-inner
  */
 export const Input: React.FC<InputProps> = (props) => {
-  const {disabled, size, icon, prepend, append, style, ...restProps} = props;
+  const {disabled, size, icon, prepend, append, style,placeholder, ...restProps} = props;
 
   const classes = classNames('viking-input-wrapper', {
     'is-disabled': disabled,
@@ -45,7 +50,9 @@ export const Input: React.FC<InputProps> = (props) => {
     <div className={classes} style={style}>
       {prepend && <div className="viking-input-group-prepend">{prepend}</div>}
       {icon && <div className="icon-wrapper"><Icon icon={icon}/></div>}
-      <input className="viking-input-inner" disabled={disabled} {...restProps}/>
+      <input placeholder={placeholder}
+             className="viking-input-inner"
+             disabled={disabled} {...restProps}/>
       {append && <div className="viking-input-group-append">{append}</div>}
     </div>
   )

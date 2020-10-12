@@ -90,53 +90,59 @@ describe('test men', () => {
         expect(testProps.onSelect).not.toHaveBeenCalledWith('1');
     });
     it('submenu dropdown', async () => {
-        expect(wrapper.queryByText('drop1')).not.toBeVisible();
+        expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
 
         const dropdownElement = wrapper.getByText('drop down');
         fireEvent.mouseEnter(dropdownElement);
         await wait(() => {
-            expect(wrapper.queryByText('drop1')).toBeVisible();
+            expect(wrapper.queryByText('drop1')).toBeInTheDocument();
         });
         fireEvent.click(wrapper.getByText('drop1'));
         expect(testProps.onSelect).toHaveBeenCalledWith('3-0');
 
         fireEvent.mouseLeave(dropdownElement);
         await wait(() => {
-            expect(wrapper.queryByText('drop1')).not.toBeVisible();
+            expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
         })
     });
-    it('vertical', () => {
+    it('vertical', async () => {
         cleanup();
         const wrapper2 = render(func(testProps2));
         wrapper2.container.appendChild(createStyleFile());
         const menuElement2 = wrapper2.getByTestId("test-menu");
 
         expect(menuElement2).toHaveClass('menu-vertical');
-        expect(wrapper2.queryByText('drop1')).not.toBeVisible();
+        expect(wrapper2.queryByText('drop1')).not.toBeInTheDocument();
 
         const dropdownElement2 = wrapper2.getByText('drop down');
         fireEvent.click(dropdownElement2);
-        expect(wrapper2.queryByText('drop1')).toBeVisible();
+        expect(wrapper2.queryByText('drop1')).toBeInTheDocument();
 
         fireEvent.click(dropdownElement2);
-        expect(wrapper2.queryByText('drop1')).not.toBeVisible();
+
+        await wait(() => {
+            expect(wrapper2.queryByText('drop1')).not.toBeInTheDocument();
+        });
     });
 
-    it('vertical', () => {
+    it('vertical', async () => {
         cleanup();
         const wrapper3 = render(func(testProps3));
         wrapper3.container.appendChild(createStyleFile());
         const menuElement2 = wrapper3.getByTestId("test-menu");
 
         expect(menuElement2).toHaveClass('menu-vertical');
-        expect(wrapper3.queryByText('drop1')).toBeVisible();
+        expect(wrapper3.queryByText('drop1')).toBeInTheDocument();
 
         const dropdownElement2 = wrapper3.getByText('drop down');
         fireEvent.click(dropdownElement2);
-        expect(wrapper3.queryByText('drop1')).not.toBeVisible();
+
+        await wait(() => {
+            expect(wrapper3.queryByText('drop1')).not.toBeInTheDocument();
+        });
 
         fireEvent.click(dropdownElement2);
-        expect(wrapper3.queryByText('drop1')).toBeVisible();
+        expect(wrapper3.queryByText('drop1')).toBeInTheDocument();
     });
 
 })

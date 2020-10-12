@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import Alert, { IAlertProps } from './alert';
+import {render, fireEvent, wait} from '@testing-library/react';
+import {Alert, IAlertProps } from './alert';
 
 const testAlertProp: IAlertProps = {
   title: "testAlert",
@@ -17,14 +17,14 @@ const testSuccessAlertProp: IAlertProps = {
 }
 
 describe('test Alert component', () => {
-  it('should render the correct default Alert', () => {
+  it('should render the correct default Alert', async () => {
     const wrapper = render(<Alert {...testAlertProp}>Nice</Alert>);
     const element = wrapper.queryByText('Nice');
 
     expect(element).toBeInTheDocument();
     expect(element.tagName).toEqual('P');
     expect(element).toHaveClass('alert-message');
-    expect(element.parentNode).toHaveClass('alert alert-default');
+    expect(element.parentNode).toHaveClass('alert alert-primary');
 
     const titleElement = wrapper.queryByText('testAlert');
     expect(titleElement).toBeInTheDocument();
@@ -33,10 +33,13 @@ describe('test Alert component', () => {
 
     const iconElement = wrapper.queryByText('关闭');
     fireEvent.click(iconElement);
-    expect(element).not.toBeInTheDocument();
+    await wait(() => {
+      expect(element).not.toBeInTheDocument();
+    });
+
   });
 
-  it('should render the correct component based on different props', () => {
+  it('should render the correct component based on different props', async () => {
     const wrapper = render(<Alert {...testSuccessAlertProp}>Nice</Alert>);
     const element = wrapper.queryByText('Nice');
 
@@ -48,6 +51,8 @@ describe('test Alert component', () => {
     const iconElement = wrapper.queryByText('关闭');
     expect(iconElement).toBeInTheDocument();
     fireEvent.click(iconElement);
-    expect(element).not.toBeInTheDocument();
+    await wait(() => {
+      expect(element).not.toBeInTheDocument();
+    })
   });
 })
