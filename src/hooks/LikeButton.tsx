@@ -16,7 +16,7 @@ const LikeButton: React.FC = () => {
     setTimeout(() => {
       alert('you clicked on ' + likeRef.current);
     }, 3000);
-  };
+  }
 
   const domRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
