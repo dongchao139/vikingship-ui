@@ -1,22 +1,30 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {ReactElement, useEffect, useRef, useState} from "react";
 import {Input, InputProps} from "./input";
 import {Subject} from "rxjs";
 import {debounceTime, filter, map, tap} from "rxjs/operators";
 
+interface DataSource {
+  value: string;
+}
+
+export type DataSourceType<T = {}> = T & DataSource;
+
 export interface AutoCompleteProps extends Omit<InputProps,'onSelect'> {
-  dataArr: string[];
-  searchFunc: (keyword: string, item: string) => boolean;
-  onSelect?: (item: string) => void;
+  dataArr: DataSourceType[];
+  searchFunc: (keyword: string, item: DataSourceType) => boolean;
+  onSelect?: (item: DataSourceType) => void;
+  renderOption?: (item: DataSourceType) => ReactElement;
 }
 
 export const Autocomplete: React.FC<AutoCompleteProps> = (
   {
-    dataArr, searchFunc,onSelect, value, ...restProps
+    dataArr, searchFunc,onSelect, value,
+    renderOption, ...restProps
   }
 ) => {
   const ref = useRef<Subject<string>>();
 
-  const [dataFiltered, setDataFiltered] = useState([]);
+  const [dataFiltered, setDataFiltered] = useState<DataSourceType[]>([]);
   const [inputValue, changeInputValue] = useState(value);
 
   function handleInput(e) {
@@ -37,7 +45,7 @@ export const Autocomplete: React.FC<AutoCompleteProps> = (
     ref.current.pipe(
       filter((text: string) => text.trim().length > 0),
       tap(val => {
-        console.log(val)
+        // console.log(val)
       }),
       debounceTime(150),
       map((keyword: string) => {
@@ -45,28 +53,35 @@ export const Autocomplete: React.FC<AutoCompleteProps> = (
           return searchFunc(keyword, data);
         });
       })
-    ).subscribe((results: string[]) => {
-      console.log(results);
+    ).subscribe((results: DataSourceType[]) => {
+      // console.log(results);
       setDataFiltered(results);
     }, (err: any) => {
-      console.log(err);
+      console.error(err);
     });
   }, [dataArr, searchFunc]);
 
-  const handleSelect = (data: string) => {
-    changeInputValue(data);
+  const handleSelect = (data: DataSourceType) => {
+    changeInputValue(data.value);
     setDataFiltered([]);
     if (onSelect) {
       onSelect(data);
     }
   }
 
+  const renderTemplate = (item: DataSourceType) => {
+    return renderOption ? renderOption(item) : item;
+  }
   return (
     <>
       <Input value={inputValue} {...restProps} onChange={handleInput}/>
       <ul>
         {dataFiltered.map(data => {
-          return <li onClick={() => handleSelect(data)} key={data}>{data}</li>
+          return (
+            <li onClick={() => handleSelect(data)} key={data.value}>
+              {renderTemplate(data)}
+            </li>
+          )
         })}
       </ul>
     </>
