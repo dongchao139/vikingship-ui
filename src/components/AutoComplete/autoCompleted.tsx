@@ -2,7 +2,8 @@ import React, {ReactElement, useEffect, useRef, useState} from "react";
 import {Input, InputProps} from "../Input/input";
 import {from, Subject} from "rxjs";
 import Axios, {AxiosResponse} from "axios";
-import {debounceTime, filter, map, switchAll} from "rxjs/operators";
+import {debounceTime, filter, map, switchAll, tap} from "rxjs/operators";
+import Icon from "../icon/icon";
 
 interface DataSource {
   value: string;
@@ -28,6 +29,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
 
   const [dataFiltered, setDataFiltered] = useState<DataSourceType[]>([]);
   const [inputValue, changeInputValue] = useState(value);
+  const [loading, setLoading] = useState(false);
 
   function handleInput(e) {
     changeInputValue(e.target.value);
@@ -47,6 +49,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     ref.current.pipe(
       filter((text: string) => text.trim().length > 0),
       debounceTime(150),
+      tap(() => setLoading(true)),
       map((keyword: string) => {
         if (fetchUrl) {
           return from(
@@ -62,6 +65,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
       switchAll(),
     ).subscribe((results: DataSourceType<{number: number}>[]) => {
       setDataFiltered(results);
+      setLoading(false)
     }, (err: any) => {
       console.error(err);
     });
@@ -81,6 +85,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
   return (
     <>
       <Input value={inputValue} {...restProps} onChange={handleInput}/>
+      {loading && <ul><Icon icon="spinner" spin/></ul>}
       <ul>
         {dataFiltered.map(data => {
           return (
