@@ -1,6 +1,6 @@
 import React from 'react';
-import {Autocomplete} from "./components/Input/autocomplete";
-import {AutoComplete, DataSourceType} from "./components/autoComplete";
+import {AutoCompleted} from "./components/AutoComplete/autoCompleted";
+import {AutoComplete, DataSourceType} from "./components/AutoComplete/autoComplete";
 import {Input} from "./components/Input/input";
 
 
@@ -38,8 +38,9 @@ function App() {
              style={{width: '500px'}}
         // append=".com"
       />
-      <Autocomplete dataArr={arr} placeholder="test" renderOption={renderOption}
-                    searchFunc={searchFunction} onSelect={handleSelect}/>
+      <AutoCompleted dataArr={arr} fetchUrl="/data.json"
+                     placeholder="test" renderOption={renderOption}
+                     searchFunc={searchFunction} onSelect={handleSelect}/>
       <AutoComplete placeholder="test" renderOption={renderOption}
                     fetchSuggestion={handleFetch} onSelect={handleSelect}/>
     </div>

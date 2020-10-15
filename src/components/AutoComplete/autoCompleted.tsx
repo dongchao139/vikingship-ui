@@ -1,7 +1,8 @@
 import React, {ReactElement, useEffect, useRef, useState} from "react";
-import {Input, InputProps} from "./input";
-import {Subject} from "rxjs";
-import {debounceTime, filter, map, tap} from "rxjs/operators";
+import {Input, InputProps} from "../Input/input";
+import {from, Subject} from "rxjs";
+import Axios, {AxiosResponse} from "axios";
+import {debounceTime, filter, map, switchAll} from "rxjs/operators";
 
 interface DataSource {
   value: string;
@@ -14,11 +15,12 @@ export interface AutoCompleteProps extends Omit<InputProps,'onSelect'> {
   searchFunc: (keyword: string, item: DataSourceType) => boolean;
   onSelect?: (item: DataSourceType) => void;
   renderOption?: (item: DataSourceType) => ReactElement;
+  fetchUrl?: string;
 }
 
-export const Autocomplete: React.FC<AutoCompleteProps> = (
+export const AutoCompleted: React.FC<AutoCompleteProps> = (
   {
-    dataArr, searchFunc,onSelect, value,
+    dataArr,fetchUrl, searchFunc,onSelect, value,
     renderOption, ...restProps
   }
 ) => {
@@ -44,22 +46,26 @@ export const Autocomplete: React.FC<AutoCompleteProps> = (
 
     ref.current.pipe(
       filter((text: string) => text.trim().length > 0),
-      tap(val => {
-        // console.log(val)
-      }),
       debounceTime(150),
       map((keyword: string) => {
-        return dataArr.filter(data => {
-          return searchFunc(keyword, data);
-        });
-      })
-    ).subscribe((results: DataSourceType[]) => {
-      // console.log(results);
+        if (fetchUrl) {
+          return from(
+            Axios.get('http://localhost:3000/' + fetchUrl)
+              .then((response: AxiosResponse<DataSourceType<{number: number}>[]>) => response.data)
+              .then(dataArr => dataArr.filter(data => searchFunc(keyword, data)))
+          )
+        }
+       return from(
+         [dataArr.filter(data => searchFunc(keyword, data))]
+       )
+      }),
+      switchAll(),
+    ).subscribe((results: DataSourceType<{number: number}>[]) => {
       setDataFiltered(results);
     }, (err: any) => {
       console.error(err);
     });
-  }, [dataArr, searchFunc]);
+  }, [dataArr, fetchUrl, searchFunc]);
 
   const handleSelect = (data: DataSourceType) => {
     changeInputValue(data.value);

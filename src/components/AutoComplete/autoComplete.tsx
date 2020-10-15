@@ -1,5 +1,5 @@
 import React, {ChangeEvent, ReactElement, useState} from "react";
-import {Input, InputProps} from "./Input/input";
+import {Input, InputProps} from "../Input/input";
 
 interface DataSource {
   value: string;
