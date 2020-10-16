@@ -1,0 +1,14 @@
+ul {
+  padding-left: 0;
+  li {
+    list-style: none;
+  }
+}
+.suggestion-item {
+  padding-left: 1em;
+}
+
+.item-highlight {
+  background: $primary;
+  color: $white;
+}
