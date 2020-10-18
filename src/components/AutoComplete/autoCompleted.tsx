@@ -5,6 +5,7 @@ import Axios, {AxiosResponse} from "axios";
 import {debounceTime, filter, map, switchAll, tap} from "rxjs/operators";
 import Icon from "../icon/icon";
 import classNames from "classnames";
+import useClickOutside from "../../hooks/useClickOutside";
 
 interface DataSource {
   value: string;
@@ -32,6 +33,10 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
   const [inputValue, changeInputValue] = useState(value);
   const [loading, setLoading] = useState(false);
   const [highLight, setHighLightIndex] = useState(-1);
+  const componentRef = useRef<HTMLDivElement>(null);
+  useClickOutside(componentRef,()=> {
+    setDataFiltered([]);
+  });
 
   function handleInput(e) {
     changeInputValue(e.target.value);
@@ -121,7 +126,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
   }
 
   return (
-    <>
+    <div ref={componentRef}>
       <Input value={inputValue} {...restProps}
              onKeyDown={handleKeyDown}
              onChange={handleInput}/>
@@ -138,6 +143,6 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
           )
         })}
       </ul>
-    </>
+    </div>
   )
 }

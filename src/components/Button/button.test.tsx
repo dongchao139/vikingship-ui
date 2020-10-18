@@ -26,7 +26,7 @@ const disabledProps: ButtonProps = {
  * @testing-library/jest-dom: (create-react-app 3.3.0版本默认已添加)
  *  npm install --save-dev @testing-library/jest-dom
  *
- * @testing-library/react: (create-react-app 3.3.0版本默认已添加)
+ * @testing-library/react: (create-react-app 3.3.0版本默认已添加. 包含@testing-library/dom依赖)
  *  npm install --save-dev @testing-library/react
  *
  * AAA模式：编排（Arrange），执行（Act），断言（Assert）。
