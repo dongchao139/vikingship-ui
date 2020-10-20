@@ -6,6 +6,7 @@ import {debounceTime, filter, map, switchAll, tap} from "rxjs/operators";
 import Icon from "../icon/icon";
 import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
+import {useEventCallback} from "rxjs-hooks";
 
 interface DataSource {
   value: string;
@@ -27,21 +28,50 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     renderOption, ...restProps
   }
 ) => {
-  const ref = useRef<Subject<string>>();
-
   const [dataFiltered, setDataFiltered] = useState<DataSourceType[]>([]);
   const [inputValue, changeInputValue] = useState(value);
   const [loading, setLoading] = useState(false);
   const [highLight, setHighLightIndex] = useState(-1);
   const componentRef = useRef<HTMLDivElement>(null);
+  //参考: https://github.com/LeetCode-OpenSource/rxjs-hooks
+  const [onChangeCallback] = useEventCallback(event$ => {
+    event$.pipe(
+      filter((text: string) => text.trim().length === 0),
+      debounceTime(150),
+    ).subscribe(() => {
+      setDataFiltered([])
+    });
+    return event$.pipe(
+      filter((text: string) => text.trim().length > 0),
+      debounceTime(150),
+      tap(() => setLoading(true)),
+      map((keyword: string) => {
+        if (fetchUrl) {
+          return from(
+            Axios.get('http://localhost:3000/' + fetchUrl)
+              .then((response: AxiosResponse<DataSourceType<{number: number}>[]>) => response.data)
+              .then(dataArr => dataArr.filter(data => searchFunc(keyword, data)))
+          )
+        }
+        return from(
+          [dataArr.filter(data => searchFunc(keyword, data))]
+        )
+      }),
+      switchAll(),
+      map((results: DataSourceType<{number: number}>[]) => {
+        setDataFiltered(results);
+        setLoading(false)
+      })
+    );
+  })
   useClickOutside(componentRef,()=> {
     setDataFiltered([]);
   });
 
   function handleInput(e) {
+    onChangeCallback(e.target.value);
     changeInputValue(e.target.value);
     setHighLightIndex(-1);
-    ref.current.next(e.target.value);
   }
 
   const handleSelect = (data: DataSourceType) => {
@@ -83,43 +113,6 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     }
     setHighLightIndex(index);
   }
-
-
-  useEffect(() => {
-    ref.current = new Subject<string>();
-
-    ref.current.pipe(
-      filter((text: string) => text.trim().length === 0),
-      debounceTime(150),
-    ).subscribe(() => {
-      setDataFiltered([])
-    });
-
-    ref.current.pipe(
-      filter((text: string) => text.trim().length > 0),
-      debounceTime(150),
-      tap(() => setLoading(true)),
-      map((keyword: string) => {
-        if (fetchUrl) {
-          return from(
-            Axios.get('http://localhost:3000/' + fetchUrl)
-              .then((response: AxiosResponse<DataSourceType<{number: number}>[]>) => response.data)
-              .then(dataArr => dataArr.filter(data => searchFunc(keyword, data)))
-          )
-        }
-       return from(
-         [dataArr.filter(data => searchFunc(keyword, data))]
-       )
-      }),
-      switchAll(),
-    ).subscribe((results: DataSourceType<{number: number}>[]) => {
-      setDataFiltered(results);
-      setLoading(false)
-    }, (err: any) => {
-      console.error(err);
-    });
-  }, [dataArr, fetchUrl, searchFunc]);
-
 
   const renderTemplate = (item: DataSourceType) => {
     return renderOption ? renderOption(item) : item;

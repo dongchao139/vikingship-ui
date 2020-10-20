@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import Demo05 from "./demos/Demo05";
 import axios, {AxiosResponse} from 'axios';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
   }
   return (
     <div>
+      <Demo05 />
       <header className="App-header">
         <h3>{title}</h3>
       </header>
