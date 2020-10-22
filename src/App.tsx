@@ -8,9 +8,13 @@ function App() {
   const handleError = (err) => {
     console.error(err);
   }
+  const handleProgress = (percentage) => {
+    console.log("percentage: " + percentage);
+  }
   return (
     <Upload action="http://127.0.0.1:4200/users/upload"
      onSuccess={handleSuccess} onError={handleError}
+     onProgress={handleProgress}
     />
   )
 }
