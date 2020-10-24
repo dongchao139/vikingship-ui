@@ -1,5 +1,11 @@
 import React from 'react';
-import {Upload} from "./components/FileUpload/upload";
+import {Upload, UploadFile} from "./components/FileUpload/upload";
+
+const defaultFileList: UploadFile[] = [
+  {uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 0.5},
+  {uid: '456', size: 1234, name: 'xyz.md', status: 'success', percent: 0.5},
+  {uid: '789', size: 1234, name: 'eyiha.md', status: 'error', percent: 0.5}
+]
 
 function App() {
   const handleSuccess = (data) => {
@@ -14,7 +20,7 @@ function App() {
   return (
     <Upload action="http://127.0.0.1:4200/users/upload"
      onSuccess={handleSuccess} onError={handleError}
-     onProgress={handleProgress}
+     onProgress={handleProgress} defaultFileList={defaultFileList}
     />
   )
 }

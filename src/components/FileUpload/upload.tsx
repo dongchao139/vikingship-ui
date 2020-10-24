@@ -1,8 +1,9 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
 import axios from 'axios';
-import {map, mergeLeft} from 'ramda';
+import {map, filter, mergeLeft} from 'ramda';
 
 import {Button, ButtonType} from '../Button/button';
+import {UploadList} from "./uploadList";
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error';
 
@@ -16,8 +17,11 @@ export interface UploadFile {
   response?: any;
   error?: any;
 }
-
 export interface UploadProps {
+  /**
+   * 文件列表
+   */
+  defaultFileList?: UploadFile[];
   /**
    * the url file will be send to
    */
@@ -50,17 +54,31 @@ export interface UploadProps {
    * @param file
    */
   onChange?: (file: File) => void;
+  /**
+   * 移除文件列表
+   * @param file
+   */
+  onRemove?: (file: UploadFile) => void;
 }
 
 export const Upload: React.FC<UploadProps> = (
   {
-    action, beforeUpload, onProgress, onSuccess, onError, onChange
+    defaultFileList, action, beforeUpload, onProgress,
+    onSuccess, onError, onChange, onRemove
   }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList);
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
+    }
+  }
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevList) => {
+      return filter((item: UploadFile) => item.uid !== file.uid)(prevList)
+    })
+    if (onRemove) {
+      onRemove(file)
     }
   }
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -153,6 +171,7 @@ export const Upload: React.FC<UploadProps> = (
       <input className="viking-file-input" style={{display: 'none'}}
        type="file" ref={inputRef} onChange={handleFileChange}
       />
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   )
 }
