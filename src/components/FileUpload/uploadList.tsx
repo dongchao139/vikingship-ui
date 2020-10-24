@@ -17,7 +17,7 @@ export const UploadList: React.FC<UploadListProps> = (
         return <li className="viking-upload-list-item"
         key={item.uid}>
           <span className={`file-name file-name-${item.status}`}>
-            <Icon icon="file-alt" theme="secondary" />
+            <Icon icon="file-alt" />
             {item.name}
           </span>
           <span className="file-status">

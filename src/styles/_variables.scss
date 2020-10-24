@@ -325,3 +325,11 @@ $input-transition:                      border-color .3s ease-in-out, box-shadow
 $input-group-addon-color:               $input-color !default;
 $input-group-addon-bg:                  $gray-200 !default;
 $input-group-addon-border-color:        $input-border-color !default;
+
+// upload list
+$uploadlist-font-size: $font-size-base;
+$uploadlist-line-height: 2.5em;
+$uploadlist-border:  1px solid $gray-500;
+$uploadlist-box-shadow: 0 1px 1px $gray-300;
+$uploadlist-icon-size: $font-size-base;
+$uploadlist-item-width: 15rem;

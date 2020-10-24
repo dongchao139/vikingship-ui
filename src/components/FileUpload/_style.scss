@@ -1,0 +1,43 @@
+.viking-upload-list-item {
+  padding-left: .5rem;
+  font-size: $uploadlist-font-size;
+  line-height: $uploadlist-line-height;
+  border-bottom: $uploadlist-border;
+  box-shadow: $uploadlist-box-shadow;
+  cursor: pointer;
+  .file-name {
+    display: inline-block;
+    width: $uploadlist-item-width;
+    .viking-icon {
+      margin-right: .5 * $uploadlist-icon-size;
+    }
+    &:hover {
+      color: $primary;
+    }
+  }
+  .file-name-success {
+    color: $success;
+  }
+  .file-name-error {
+    color: $danger;
+  }
+  .file-status, .file-actions {
+    width: $uploadlist-icon-size;
+    text-align: center;
+  }
+  .file-status {
+    display: inline-block;
+  }
+  .file-actions {
+    display: none;
+  }
+  &:hover {
+    .file-actions {
+      color: $primary;
+      display: inline-block;
+    }
+    .file-status {
+      display: none;
+    }
+  }
+}
