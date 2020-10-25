@@ -30,41 +30,67 @@ export interface UploadProps {
    * 上传文件之前验证或进行转换
    * @param file
    */
-  beforeUpload?: (file: File) => boolean | Promise<File>;
+  beforeUpload?: (file: UploadFile) => boolean | Promise<UploadFile>;
   /**
    * on progress life-cycle callback
    * @param percentage
    * @param file
    */
-  onProgress?: (percentage: number, file: File) => void;
+  onProgress?: (percentage: number, file: UploadFile) => void;
   /**
    * on success life-cycle callback
    * @param data
    * @param file
    */
-  onSuccess?: (data: any, file: File) => void;
+  onSuccess?: (data: any, file: UploadFile) => void;
   /**
    * on error life-cycle callback
    * @param err
    * @param file
    */
-  onError?: (err: any, file: File) => void;
+  onError?: (err: any, file: UploadFile) => void;
   /**
    * 成功和失败后的回调
    * @param file
    */
-  onChange?: (file: File) => void;
+  onChange?: (file: UploadFile) => void;
   /**
    * 移除文件列表
    * @param file
    */
   onRemove?: (file: UploadFile) => void;
+  /**
+   * 额外的请求头
+   */
+  headers?: {[key: string]: any};
+  /**
+   * 文件名
+   */
+  name?: string;
+  /**
+   * 额外的参数
+   */
+  data?: {[key: string]: any};
+  /**
+   * 是否携带请求参数
+   */
+  withCredentials?: boolean;
+  /**
+   * 筛选可用的文件类型
+   */
+  accept?: string;
+  /**
+   * 允许上传多个文件
+   */
+  multiple?: boolean;
 }
 
 export const Upload: React.FC<UploadProps> = (
   {
     defaultFileList, action, beforeUpload, onProgress,
-    onSuccess, onError, onChange, onRemove
+    onSuccess, onError, onChange, onRemove,
+    headers,name,data,withCredentials,
+    accept, multiple
   }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList);
@@ -94,16 +120,24 @@ export const Upload: React.FC<UploadProps> = (
   const uploadFiles = (fiels: FileList) => {
     let postFiles = Array.from(fiels);
     postFiles.forEach(file => {
+      let _file: UploadFile = {
+        uid: Date.now() + "-",
+        status: 'ready',
+        name: file.name,
+        size: file.size,
+        percent: 0,
+        raw: file
+      }
       if (!beforeUpload) {
-        post(file);
+        post(_file);
       } else {
-        const result = beforeUpload(file);
+        const result = beforeUpload(_file);
         if (result && result instanceof Promise) {
           result.then(processedFile => {
             post(processedFile)
           })
         } else if(result !== false) {
-          post(file);
+          post(_file);
         }
       }
     })
@@ -118,46 +152,47 @@ export const Upload: React.FC<UploadProps> = (
       })(prevList);
     })
   }
-  const post = (file: File) => {
-    let _file: UploadFile = {
-      uid: Date.now() + "-",
-      status: 'ready',
-      name: file.name,
-      size: file.size,
-      percent: 0,
-      raw: file
-    }
-    setFileList([_file, ...fileList])
+  const post = (_file: UploadFile) => {
+    setFileList(prevList => {
+      return [_file, ...prevList]
+    })
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append(name || 'file', _file.raw);
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
+    }
     axios.post(action, formData, {
       headers: {
+        ...headers,
         'Content-Type': 'multipart/form-data'
       },
+      withCredentials,
       onUploadProgress: (e) => {
         let percentage = Math.round((e.loaded * 100) / e.total) || 0;
         if (percentage <= 100) {
           updateFileList(_file, {percent: percentage, status: "uploading"});
           if (onProgress) {
-            onProgress(percentage, file);
+            onProgress(percentage, _file);
           }
         }
       }
     }).then(resp => {
       updateFileList(_file, {status: "success", response: resp.data});
       if (onSuccess) {
-        onSuccess(resp.data, file);
+        onSuccess(resp.data, _file);
       }
       if (onChange) {
-        onChange(file);
+        onChange(_file);
       }
     }).catch(err => {
       updateFileList(_file, {status: "error", response: err});
       if (onError) {
-        onError(err, file);
+        onError(err, _file);
       }
       if (onChange) {
-        onChange(file);
+        onChange(_file);
       }
     })
   }
@@ -169,7 +204,8 @@ export const Upload: React.FC<UploadProps> = (
         Upload File
       </Button>
       <input className="viking-file-input" style={{display: 'none'}}
-       type="file" ref={inputRef} onChange={handleFileChange}
+       type="file" ref={inputRef} onChange={handleFileChange} 
+       accept={accept} multiple={multiple}
       />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
