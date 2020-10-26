@@ -3,7 +3,7 @@ import {Input, InputProps} from "../Input/input";
 import {from} from "rxjs";
 import Axios, {AxiosResponse} from "axios";
 import {debounceTime, filter, map, switchAll, tap} from "rxjs/operators";
-import Icon from "../icon/icon";
+import {Icon} from "../icon/icon";
 import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
 import {useEventCallback} from "rxjs-hooks";
