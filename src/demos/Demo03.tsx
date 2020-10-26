@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from "../components/Tabs/tabs";
+import {Tabs} from "../components/Tabs/tabs";
 import TabsItem from "../components/Tabs/tabs-item";
 
 function Demo03(_props) {

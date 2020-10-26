@@ -11,10 +11,13 @@ export interface TabProps {
   className?: string;
 }
 
-const Tabs: React.FC<TabProps> = (props) => {
-  const classes = classNames('tabs-nav', props.className, {
-    'tabs-underline': props.styleType === "underline",
-    'tabs-outline': props.styleType === "outline"
+export const Tabs: React.FC<TabProps> = 
+({
+  className, styleType = 'underline', defaultIndex = 0, children,onSelect
+}) => {
+  const classes = classNames('tabs-nav', className, {
+    'tabs-underline': styleType === "underline",
+    'tabs-outline': styleType === "outline"
   });
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -23,8 +26,8 @@ const Tabs: React.FC<TabProps> = (props) => {
       return;
     }
     setActiveIndex(index);
-    if (typeof props.onSelect === 'function') {
-      props.onSelect(index);
+    if (typeof onSelect === 'function') {
+      onSelect(index);
     }
   }
 
@@ -32,7 +35,7 @@ const Tabs: React.FC<TabProps> = (props) => {
     <div>
       <nav className={classes}>
         <ul className="tabs-ul">
-          {React.Children.map(props.children, (child, index) => {
+          {React.Children.map(children, (child, index) => {
             const childElement = child as React.FunctionComponentElement<TabsItemProps>;
             const itemLabelClasses = classNames('tabs-label', {
               'tabs-label-active': activeIndex === index,
@@ -45,16 +48,10 @@ const Tabs: React.FC<TabProps> = (props) => {
           })}
         </ul>
       </nav>
-      {React.Children.map(props.children, (child, index) => {
+      {React.Children.map(children, (child, index) => {
         const childElement = child as React.FunctionComponentElement<TabsItemProps>;
         return React.cloneElement(childElement, {isActive: activeIndex === index});
       })}
     </div>
   )
 }
-
-Tabs.defaultProps = {
-  defaultIndex: 0,
-  styleType: 'underline'
-}
-export default Tabs;
