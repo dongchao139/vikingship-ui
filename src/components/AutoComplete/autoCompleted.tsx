@@ -115,7 +115,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
   }
 
   const renderTemplate = (item: DataSourceType) => {
-    return renderOption ? renderOption(item) : item;
+    return renderOption ? renderOption(item) : item.value;
   }
 
   return (

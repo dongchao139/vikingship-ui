@@ -38,6 +38,7 @@ const Demo05: React.FC = (props) => {
       <AutoCompleted dataArr={arr} fetchUrl="/data.json"
                      placeholder="test" renderOption={renderOption}
                      searchFunc={searchFunction} onSelect={handleSelect}/>
+                     
       <AutoComplete placeholder="test" renderOption={renderOption}
                     fetchSuggestion={handleFetch} onSelect={handleSelect}/>
     </div>
