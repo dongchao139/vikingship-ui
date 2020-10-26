@@ -1,5 +1,6 @@
 import React from 'react'
 import {Upload, UploadFile} from "../components/FileUpload/upload";
+import {Button, ButtonType} from '../components/Button/button';
 
 const defaultFileList: UploadFile[] = [
   {uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 20},
@@ -23,7 +24,12 @@ function Demo07() {
      accept="*.xlsx" multiple={true}
      onSuccess={handleSuccess} onError={handleError}
      onProgress={handleProgress} defaultFileList={defaultFileList}
-    />
+     drag={true}
+    >
+      <Button btnType={ButtonType.Primary}>
+        Upload File
+      </Button>
+    </Upload>
   )
 }
 

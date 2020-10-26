@@ -41,3 +41,13 @@
     }
   }
 }
+
+.viking-uploader-dragger > .btn {
+  color: $primary;
+  background-color: $white;
+}
+
+.viking-uploader-dragger.is-dragover > .btn {
+  color: $white;
+  background-color: $gray-700;
+}
