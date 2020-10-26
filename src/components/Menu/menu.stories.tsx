@@ -1,13 +1,18 @@
 import React from "react";
-import {Menu} from "../components/Menu/menu";
-import MenuItem from "../components/Menu/menuItem";
-import SubMenu from "../components/Menu/submenu";
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { Menu, MenuProps} from './menu';
+import MenuItem from './menuItem';
+import SubMenu from './submenu';
 
-function Demo02(_props) {
-  return (
-    <>
-      <hr/>
-      <Menu defaultIndex={'0'} onSelect={i => console.log(i)}>
+export default {
+    title: 'New/Menu',
+    component: Menu,
+} as Meta;
+
+export const Horizontal = (args) => (
+    <Menu defaultIndex={'0'} onSelect={i => console.log(i)}
+        {...args}
+    >
         <MenuItem>
           cool link1
         </MenuItem>
@@ -29,9 +34,11 @@ function Demo02(_props) {
           cool link3
         </MenuItem>
       </Menu>
-      <hr/>
-      <Menu defaultIndex={'0'} onSelect={i => console.log(i)}
-            mode="vertical"
+)
+
+export const Vertical = (args) => (
+    <Menu defaultIndex={'0'} onSelect={i => console.log(i)}
+        mode="vertical"
         // defaultOpenSubs= {['2']}
       >
         <MenuItem>
@@ -55,8 +62,4 @@ function Demo02(_props) {
           cool link3
         </MenuItem>
       </Menu>
-    </>
-  )
-}
-
-export default Demo02;
+)

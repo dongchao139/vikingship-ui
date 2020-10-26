@@ -10,7 +10,6 @@
         display: flex;
         flex-wrap: wrap;
         >.tabs-label {
-            margin-bottom: 0;
             padding: $tabs-label-padding-y $tabs-label-padding-x;
             cursor: pointer;
             border-top-left-radius: $tabs-label-border-radius;

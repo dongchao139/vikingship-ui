@@ -560,3 +560,12 @@ main {
 [hidden] {
   display: none !important;
 }
+
+// storybook 样式冲突 
+ul.viking-submenu {
+  margin-top: 0 !important;
+}
+
+li.menu-item, li.tabs-label {
+  margin-bottom: 0;
+}
