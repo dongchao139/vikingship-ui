@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Menu from "../components/Menu/menu";
+import {Menu} from "../components/Menu/menu";
 import MenuItem from "../components/Menu/menuItem";
 import SubMenu from "../components/Menu/submenu";
 import {Button, ButtonSize, ButtonType} from "../components/Button/button";
