@@ -1,3 +1,7 @@
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fas}from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
+
 export {Button} from './src/components/Button';
 export {Alert} from './src/components/Alert';
 export {AutoCompleted} from './src/components/AutoComplete';
