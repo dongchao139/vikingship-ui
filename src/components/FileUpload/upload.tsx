@@ -126,7 +126,7 @@ export const Upload: React.FC<UploadProps> = (
     postFiles.forEach(file => {
       let _file: UploadFile = {
         uid: Date.now() + "-",
-        status: 'ready',
+        status: 'uploading',
         name: file.name,
         size: file.size,
         percent: 0,

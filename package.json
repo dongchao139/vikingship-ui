@@ -35,13 +35,16 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./build",
+    "lint": "eslint --ext js,ts,tsx src --max-warnings 10",
     "build": "npm run clean && npm run build-ts && npm run build-scss",
     "test": "react-scripts test",
+    "test:nowatch": "react-scripts -r dotenv/config test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
-    "build-scss": "node-sass ./src/styles/index.scss ./build/index.css"
+    "build-scss": "node-sass ./src/styles/index.scss ./build/index.css",
+    "prepublishOnly": "npm run test:nowatch && npm run lint && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,11 +62,13 @@
     ]
   },
   "devDependencies": {
-    "typescript": "~3.7.2",
-    "react-scripts": "3.4.3",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "@babel/core": "^7.11.6",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/node-logger": "^6.0.26",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^6.0.26",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -74,14 +79,13 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-transition-group": "^4.4.0",
-    "@babel/core": "^7.11.6",
-    "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-essentials": "^6.0.26",
-    "@storybook/addon-links": "^6.0.26",
-    "@storybook/node-logger": "^6.0.26",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.26",
     "babel-loader": "^8.1.0",
-    "react-is": "^16.13.1"
+    "dotenv": "^8.2.0",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "react-scripts": "3.4.3",
+    "typescript": "~3.7.2"
   }
 }

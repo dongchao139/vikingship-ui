@@ -9,12 +9,13 @@ interface UploadListProps {
 }
 export const UploadList: React.FC<UploadListProps> = (
   {
-    fileList, onRemove
+    fileList, 
+    onRemove
   }) => {
 
   return (
     <ul className="viking-upload-list">
-      {fileList.map(item => {
+      {fileList && fileList.map(item => {
         return <li className="viking-upload-list-item"
         key={item.uid}>
           <span className={`file-name file-name-${item.status}`}>

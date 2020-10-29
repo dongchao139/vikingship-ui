@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, RenderResult, fireEvent } from '@testing-library/react';
-import Tabs from "../Tabs/tabs";
+import {Tabs} from "../Tabs/tabs";
 import TabsItem from "../Tabs/tabs-item";
 
 const func = () => {

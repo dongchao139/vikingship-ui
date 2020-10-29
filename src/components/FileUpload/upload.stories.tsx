@@ -1,6 +1,6 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { Upload, UploadProps, UploadFile } from './upload';
+import { Meta } from "@storybook/react/types-6-0";
+import { Upload, UploadFile } from './upload';
 import { Button, ButtonType } from '../Button/button';
 
 export default {
@@ -9,9 +9,9 @@ export default {
 } as Meta;
 
 const defaultFileList: UploadFile[] = [
-    { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 20 },
-    { uid: '456', size: 1234, name: 'xyz.md', status: 'success', percent: 40 },
-    { uid: '789', size: 1234, name: 'eyiha.md', status: 'error', percent: 55 }
+ { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 20 },
+     { uid: '456', size: 1234, name: 'xyz.md', status: 'success', percent: 40 },
+     { uid: '789', size: 1234, name: 'eyiha.md', status: 'error', percent: 55 }
 ]
 const handleSuccess = (data) => {
     console.log('success: ' + JSON.stringify(data));
@@ -30,7 +30,7 @@ export const Default = (args) => (
         onProgress={handleProgress} defaultFileList={defaultFileList}
         {...args}
     >
-        <Button btnType={ButtonType.Primary}>
+    <Button btnType={ButtonType.Primary}>
             Upload File
      </Button>
     </Upload>

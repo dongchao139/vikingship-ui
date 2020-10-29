@@ -1,6 +1,6 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { Menu, MenuProps} from './menu';
+import { Meta } from "@storybook/react/types-6-0";
+import { Menu } from './menu';
 import MenuItem from './menuItem';
 import SubMenu from './submenu';
 
