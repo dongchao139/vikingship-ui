@@ -32,6 +32,11 @@
   "files": [
     "build"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:nowatch && npm run lint"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./build",
@@ -81,6 +86,7 @@
     "@types/react-transition-group": "^4.4.0",
     "babel-loader": "^8.1.0",
     "dotenv": "^8.2.0",
+    "husky": "^4.3.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
