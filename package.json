@@ -44,7 +44,6 @@
     "build": "npm run clean && npm run build-ts && npm run build-scss",
     "test": "react-scripts test",
     "test:nowatch": "react-scripts -r dotenv/config test",
-    "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
