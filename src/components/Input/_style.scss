@@ -1,10 +1,10 @@
 .viking-input-wrapper {
   display: flex;
-  width: 100%;
+  width: $input-max-width;
   max-width: 500px;
-  margin-bottom: 30px;
   position: relative;
   .icon-wrapper {
+    cursor: pointer;
     position: absolute;
     height: 100%;
     width: 35px;
@@ -16,6 +16,29 @@
     align-items: center;
     svg {
       color: $input-placeholder-color;
+    }
+  }
+  .input-selected-options {
+    position: absolute;
+    left: 0;
+    align-self: center;
+    margin: 2px 3px;
+    .input-selected-option {
+      margin: 0 $spacer/4; 
+      display: inline-block;
+      padding: 2px 5px;
+      color: $blue;
+      cursor: pointer;
+      border-radius: 3px;
+      border: 1px solid lighten($blue, 20%);
+      background-color: lighten($blue, 35%);
+      line-height: $line-height-base;
+      &:hover {
+        color: darken($blue, 30%)
+      }
+      .viking-icon {
+        margin-left: 3px;
+      }
     }
   }
 }

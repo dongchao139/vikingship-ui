@@ -1,0 +1,42 @@
+.viking-select-wrapper {
+    position: relative;
+    .select-options {
+        position: absolute;
+        width: 100%;
+        background-color: $white;
+        max-width: $select-options-max-width;
+        border: $select-options-border-width solid $select-options-border-color;
+        box-shadow: $select-options-shadow;
+        margin-top: $spacer/2;
+        .select-option-item {
+            position: relative;
+            padding: $select-options-padding-y $select-options-padding-x;
+            font-family: $select-options-font-family;
+            font-size: $select-options-font-size;
+            font-weight: $select-options-font-weight;
+            line-height: $select-options-line-height;
+            cursor: pointer;
+            &:hover {
+                color: $primary;
+                background-color: lighten($blue, 35%);
+            }
+            &:hover.disabled {
+                background-color: $white;
+            }
+            &.disabled {
+                cursor: not-allowed;
+                color: $gray-600;
+            }
+            &.selected {
+                color: $primary;
+                background-color: lighten($blue, 35%);
+            }
+            .viking-icon {
+                position: absolute;
+                right: 0.75rem;
+                top: 0;
+                height: 100%;
+            }
+        }
+    }
+}

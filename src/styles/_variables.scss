@@ -325,6 +325,7 @@ $input-transition:                      border-color .3s ease-in-out, box-shadow
 $input-group-addon-color:               $input-color !default;
 $input-group-addon-bg:                  $gray-200 !default;
 $input-group-addon-border-color:        $input-border-color !default;
+$input-max-width:                       500px;
 
 // upload list
 $uploadlist-font-size: $font-size-base;
@@ -340,3 +341,17 @@ $progress-bg:                       $gray-200 !default;
 $progress-border-radius:            $border-radius !default;
 $progress-bar-color:                $white !default;
 $progress-bar-transition:           width .6s ease !default;
+
+// select
+$select-options-shadow:             $box-shadow-sm;
+$select-options-max-width:          $input-max-width;
+
+$select-options-border-color:       $input-border-color !default;
+$select-options-border-width:       $input-border-width !default;
+
+$select-options-padding-y:    $input-padding-y !default;
+$select-options-padding-x:    $input-padding-x !default;
+$select-options-font-family:  $input-font-family !default;
+$select-options-font-size:    $input-font-size !default;
+$select-options-font-weight:  $input-font-weight !default;
+$select-options-line-height:  $input-line-height !default;
