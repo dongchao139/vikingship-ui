@@ -8,7 +8,6 @@ import { Upload, UploadProps } from './upload';
 jest.mock('../icon/icon', () => {
     return {
         Icon: ({ icon, onClick }) => {
-            console.log("icon=" + icon);
             return <span onClick={onClick}>{icon}</span>
         }
     }
@@ -41,7 +40,7 @@ describe('text upload component', () => {
             return new Promise((resolve, reject)=>{
                 setTimeout(()=>{
                     resolve({'data': 'cool'})
-                }, 10)
+                }, 10);
             })
         });
         expect(uploadArea).toBeInTheDocument();

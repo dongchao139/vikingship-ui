@@ -14,15 +14,19 @@ export interface SelectProps {
      * 默认选中的选项
      */
     defaultSelectedOptions?: string[];
+    /**
+     * the value was changed
+     */
+    onChange: (opts: string[]) => void;
 }
 
 export const MultipleSelect: React.FC<SelectProps> = 
 ({
-    defaultSelectedOptions, options
+    defaultSelectedOptions, options,onChange
 }) => {
     const [selectedOptions, setSelectedOptions] = useState<string[]>(defaultSelectedOptions);
     const componentRef = useRef(null);
-    const [showList, setShowList] = useState(true);
+    const [showList, setShowList] = useState(false);
     const selectOptionList = map((opt: string) => {
             if (selectedOptions.includes(opt)) {
                 return {name: opt, selected: true}
@@ -33,17 +37,23 @@ export const MultipleSelect: React.FC<SelectProps> =
     const handleItemClick = (option) => {
         setSelectedOptions(preSelectedOptions => {
             if (!preSelectedOptions.includes(option.name)) {
-                return append(option.name)(preSelectedOptions);
+                const values = append(option.name)(preSelectedOptions);
+                onChange(values);
+                return values;
             }
             const index = indexOf(option.name)(preSelectedOptions);
-            return remove(index, 1)(preSelectedOptions) as string[];
+            const values = remove(index, 1)(preSelectedOptions) as string[];
+            onChange(values);
+            return values;
         })
     }
     const handleOptionClick = (optionName) => {
         setSelectedOptions(preSelectedOptions => {
             if (preSelectedOptions.includes(optionName)) {
                 const index = indexOf(optionName)(preSelectedOptions);
-                return remove(index, 1)(preSelectedOptions) as string[];
+                const values = remove(index, 1)(preSelectedOptions) as string[];
+                onChange(values);
+                return values;
             }
             return preSelectedOptions;
         })
@@ -56,7 +66,7 @@ export const MultipleSelect: React.FC<SelectProps> =
             <Input icon={showList ? 'arrow-up' : 'arrow-down'}
             placeholder="" onOptionClick={handleOptionClick}
             onIconClick={() => setShowList(!showList)}
-            onFocus={() => setShowList(true)} >
+            onFocus={() => setShowList(true)} value="">
                 {selectedOptions}
             </Input>
             {showList && 

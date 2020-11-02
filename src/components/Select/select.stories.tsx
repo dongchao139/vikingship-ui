@@ -9,5 +9,6 @@ export default {
 
 export const DEFAULT = (args) => {
     return <MultipleSelect options={['nihao','nihao2','nihao3','disabled','nihao5']} 
+    onChange={values => console.log(values)}
      defaultSelectedOptions={['nihao','nihao2']}  {...args}/>
 }
