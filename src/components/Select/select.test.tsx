@@ -28,7 +28,7 @@ describe("test multiple select", () => {
         expect(wrapper.queryAllByText('times').length).toBe(2);
         //input里的选项的容器div
         const inputOpts = wrapper.container.querySelector('div.input-selected-options');
-        //第一个选项是nihao, 第二个是你好2
+        //第一个选项是nihao, 第二个是nihao2
         expect(inputOpts.childNodes[0]).toHaveTextContent('nihao');
         expect(inputOpts.childNodes[1]).toHaveTextContent('nihao2');
 
