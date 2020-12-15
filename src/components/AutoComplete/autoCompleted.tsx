@@ -64,7 +64,8 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
       })
     );
   })
-  useClickOutside(componentRef,()=> {
+  const $subject = useClickOutside(componentRef);
+  $subject.subscribe(e =>{
     setDataFiltered([]);
   });
 
