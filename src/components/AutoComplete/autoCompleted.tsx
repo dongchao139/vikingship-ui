@@ -1,4 +1,4 @@
-import React, {ReactElement, KeyboardEvent, useRef, useState} from "react";
+import React, {ReactElement, KeyboardEvent, useRef, useState, useEffect} from "react";
 import {Input, InputProps} from "../Input/input";
 import {from} from "rxjs";
 import Axios, {AxiosResponse} from "axios";
@@ -65,14 +65,20 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
       })
     );
   });
-  const {handler} = useSubject(sub$ =>{
+  const {handler,subject$} = useSubject(sub$ => {
     sub$.pipe(
       filter((text: string) => text.trim().length > 0),
       debounceTime(1000),
     ).subscribe((v) => {
-      console.log(v);
+      // console.log(v);
     });
   });
+  // 只能订阅一次，不能每次渲染都订阅一次
+  useEffect(() => {
+    subject$.subscribe((val)=>{
+      console.log(val);
+    });
+  }, []);
   
   const $subject = useClickOutside(componentRef);
   $subject.subscribe(e =>{
