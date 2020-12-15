@@ -1,6 +1,7 @@
+import { call } from "ramda";
 import {useRef,useCallback, useEffect} from "react";
 import { Subject } from "rxjs";
-function useSubject<T>(callback: Function) {
+function useSubject<T>(callback?: Function) {
     const subjectRef = useRef(new Subject<T>());
     // 类似于useEffect，缓存方法。
     // 与之类似的useMemo，返回的是缓存的值
@@ -9,7 +10,9 @@ function useSubject<T>(callback: Function) {
       subjectRef.current.next(e);
     },[]);
     useEffect(() => {
-        callback(subjectRef.current);
+        if (callback) {
+          callback(subjectRef.current);
+        }
     }, []);
     return {handler, subject$: subjectRef.current};
 }
