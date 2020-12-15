@@ -7,6 +7,7 @@ import {Icon} from "../icon/icon";
 import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
 import {useEventCallback} from "rxjs-hooks";
+import useSubject from '../../hooks/useSubject';
 
 interface DataSource {
   value: string;
@@ -63,14 +64,23 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
         setLoading(false)
       })
     );
-  })
+  });
+  const {handler} = useSubject(sub$ =>{
+    sub$.pipe(
+      filter((text: string) => text.trim().length > 0),
+      debounceTime(1000),
+    ).subscribe((v) => {
+      console.log(v);
+    });
+  });
+  
   const $subject = useClickOutside(componentRef);
   $subject.subscribe(e =>{
     setDataFiltered([]);
   });
-
   function handleInput(e) {
     onChangeCallback(e.target.value);
+    handler(e.target.value);
     changeInputValue(e.target.value);
     setHighLightIndex(-1);
   }

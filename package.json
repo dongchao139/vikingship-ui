@@ -34,7 +34,6 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test:nowatch && npm run lint"
     }
   },
   "scripts": {
