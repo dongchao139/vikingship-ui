@@ -1,9 +1,9 @@
-import React, {ReactElement, KeyboardEvent, useRef, useState, useEffect} from "react";
+import React, {ReactElement, KeyboardEvent, useRef, useState, useEffect, useMemo, useCallback} from "react";
 import {Input, InputProps} from "../Input/input";
 import {from} from "rxjs";
 import Axios, {AxiosResponse} from "axios";
 import {debounceTime, filter, map, switchAll, tap} from "rxjs/operators";
-import {Icon} from "../icon/icon";
+import {Icon} from "../icon";
 import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
 import {useEventCallback} from "rxjs-hooks";
@@ -74,14 +74,20 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     });
   });
   // 只能订阅一次，不能每次渲染都订阅一次
+  // useEffect当组件更新完成之后才执行，而useMemo则在更新前执行。
   useEffect(() => {
-    subject$.subscribe((val)=>{
+    subject$.subscribe((val) => {
       console.log(val);
     });
+  }, [subject$]);
+  // 只有依赖的状态发生变化时，才会重新计算。否则直接用缓存的值.
+  // 类似于 "计算属性"
+  const age = useMemo(() => {
+    return '>18成年'
   }, []);
-  
+
   const $subject = useClickOutside(componentRef);
-  $subject.subscribe(e =>{
+  $subject.subscribe(e => {
     setDataFiltered([]);
   });
   function handleInput(e) {
@@ -91,7 +97,13 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     setHighLightIndex(-1);
   }
 
-  const handleSelect = (data: DataSourceType) => {
+  // useState返回的setXxx函数在每次渲染中都是相同的.下面的set.size始终是1
+  const esSet = useRef(new Set());
+  esSet.current.add(changeInputValue);
+  console.log(esSet.current.size);
+
+  // useCallback 计算结果是函数, 主要用于缓存函数
+  const handleSelect = useCallback((data: DataSourceType) => {
     if (!data) {
       return;
     }
@@ -100,7 +112,9 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
     if (onSelect) {
       onSelect(data);
     }
-  }
+    // changeInputValue和setDataFiltered是setXxx返回的函数,始终不变.
+    // 因此这里不用添加为deps
+  }, [onSelect]);
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     switch(e.keyCode) {
@@ -140,6 +154,7 @@ export const AutoCompleted: React.FC<AutoCompleteProps> = (
       <Input value={inputValue} {...restProps}
              onKeyDown={handleKeyDown}
              onChange={handleInput}/>
+      {age}
       {loading && <ul><Icon icon="spinner" spin/></ul>}
       <ul>
         {dataFiltered.map((data, index) => {

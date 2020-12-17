@@ -1,19 +1,18 @@
-import { call } from "ramda";
 import {useRef,useCallback, useEffect} from "react";
 import { Subject } from "rxjs";
 function useSubject<T>(callback?: Function) {
     const subjectRef = useRef(new Subject<T>());
-    // 类似于useEffect，缓存方法。
-    // 与之类似的useMemo，返回的是缓存的值
-    // 如果直接写方法，则每次渲染时都会创建一份新的函数，导致子组件不必要的渲染
+    // useCallback 计算结果是函数, 主要用于缓存函数
+    // 函数式组件每次任何一个state的变化, 整个组件都会被重新刷新，一些函数是没有必要被重新刷新的，
+    // 此时就应该缓存起来，提高性能
     const handler = useCallback(function(e: any) {
       subjectRef.current.next(e);
-    },[]);
+    }, []);
     useEffect(() => {
         if (callback) {
           callback(subjectRef.current);
         }
-    }, []);
+    }, [callback]);
     return {handler, subject$: subjectRef.current};
 }
 
