@@ -87,6 +87,7 @@ module.exports = function(webpackEnv) {
         // Options for PostCSS as we reference these options twice
         // Adds vendor prefixing based on your specified browser support in
         // package.json
+        // TODO 在这里添加tailwindcss的配置
         loader: require.resolve('postcss-loader'),
         options: {
           // Necessary for external CSS imports to work
