@@ -59,7 +59,7 @@ export const Alert: React.FC<IAlertProps> = (
     <Transition in={visible} animation="zoom-in-left" timeout={300} wrapper={true}>
       <div className={classes}>
         {title ? <h4 className="alert-title">{title}</h4> : null}
-        <p className="alert-message">{children}</p>
+        <p className="alert-message m-2">{children}</p>
         {closable ? <i onClick={handleClick}>{customCloseP}</i> : null}
       </div>
     </Transition>

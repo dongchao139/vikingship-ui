@@ -33,8 +33,7 @@
     "build"
   ],
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,6 +45,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
+    "build-postcss": "NODE_ENV=production postcss src/styles/tailwind.include.css -o src/styles/tailwind.css",
     "build-scss": "node-sass ./src/styles/index.scss ./build/index.css",
     "prepublishOnly": "npm run test:nowatch && npm run lint && npm run build",
     "eject": "react-scripts eject"
@@ -83,14 +83,18 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-transition-group": "^4.4.0",
+    "autoprefixer": "^10.1.0",
     "babel-loader": "^8.1.0",
     "dotenv": "^8.2.0",
     "husky": "^4.3.0",
     "node-sass": "^4.14.1",
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
     "react-scripts": "3.4.3",
+    "tailwindcss": "^2.0.2",
     "typescript": "~3.7.2"
   }
 }
