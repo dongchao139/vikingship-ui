@@ -39,7 +39,7 @@
     "start": "react-scripts start",
     "clean": "rimraf ./build",
     "lint": "eslint --ext js,ts,tsx src --max-warnings 10",
-    "build": "npm run clean && npm run build-ts && npm run build-scss",
+    "build": "npm run clean && npm run build-ts && npm run build-scss && npm run build-postcss:prod",
     "test": "react-scripts test",
     "test:nowatch": "react-scripts -r dotenv/config test",
     "storybook": "npm run build-postcss:dev && start-storybook -p 6006 -s public",
