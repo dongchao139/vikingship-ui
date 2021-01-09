@@ -48,7 +48,7 @@
     "build-postcss:prod": "NODE_ENV=production postcss src/styles/tailwind.include.css -o src/styles/tailwind.min.css",
     "build-postcss:dev": "postcss src/styles/tailwind.include.css -o src/styles/tailwind.min.css",
     "build-scss": "node-sass ./src/styles/index.scss ./build/index.css",
-    "prepublishOnly": "npm run test:nowatch && npm run lint && npm run build",
+    "prepublishOnly": "npm run test:nowatch && npm run build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
