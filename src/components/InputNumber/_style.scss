@@ -1,0 +1,20 @@
+.number-arrow-up, .number-arrow-down {
+  display: inline-block;
+  text-align: center;
+  .svg-inline--fa.fa-w-10 {
+    width: 1.5em;
+  }
+}
+.number-arrow-up > svg {
+  display: inline-block;
+  margin-left: -2em;
+}
+.number-arrow-up > svg:hover, .number-arrow-down > svg:hover {
+  cursor: pointer;
+  background-color: lighten($primary, 30%);
+}
+.number-arrow-down > svg {
+  display: inline-block;
+  vertical-align: -1.125em;
+  margin-left: -2em;
+}

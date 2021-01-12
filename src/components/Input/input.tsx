@@ -28,16 +28,12 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
   /**
    * the placeholder
    */
-  placeholder: string;
+  placeholder?: string;
 
   /**
-   * selected options for select component
+   * the child content
    */
-  children?: string[];
-  /**
-   * one option was clicked
-   */
-  onOptionClick?: (option: string) => void;
+  children?: Array<ReactElement> | ReactElement;
   /**
    * icon was clicked
    */
@@ -50,7 +46,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
  */
 export const Input: React.FC<InputProps> = (props) => {
   const {disabled, size, icon, prepend, append, style,placeholder, children,
-    onOptionClick,onIconClick, ...restProps} = props;
+    onIconClick, ...restProps} = props;
 
   const classes = classNames('viking-input-wrapper', {
     'is-disabled': disabled,
@@ -66,16 +62,8 @@ export const Input: React.FC<InputProps> = (props) => {
       {icon && <div className="icon-wrapper" onClick={onIconClick} ><Icon icon={icon}/></div>}
       <input placeholder={placeholder}
              className="viking-input-inner"
-             disabled={disabled} {...restProps}/>
-             <div className="input-selected-options">
-             {React.Children.map(children, option => {
-               return <span className="input-selected-option" 
-                onClick={() => onOptionClick && onOptionClick(option)}>
-                 {option}
-                 <Icon icon="times" />
-               </span>
-             })} 
-               </div>
+             disabled={disabled} {...restProps} />
+      {children}
       {append && 
       <div className="viking-input-group-append">{append}</div>
       }

@@ -58,16 +58,26 @@ export const MultipleSelect: React.FC<SelectProps> =
             return preSelectedOptions;
         })
     }
-    useClickOutside(componentRef,()=> {
+    useClickOutside(componentRef,() => {
         setShowList(false);
     });
     return (
         <div className="viking-select-wrapper" ref={componentRef}>
             <Input icon={showList ? 'arrow-up' : 'arrow-down'}
-            placeholder="" onOptionClick={handleOptionClick}
+            placeholder=""
             onIconClick={() => setShowList(!showList)}
             onFocus={() => setShowList(true)} value="">
-                {selectedOptions}
+                <div className="input-selected-options">
+                    {selectedOptions && selectedOptions.map(option => {
+                        return (
+                        <span className="input-selected-option" 
+                            onClick={() => handleOptionClick && handleOptionClick(option)}>
+                            {option}
+                            <Icon icon="times" />
+                        </span>
+                        )
+                    })} 
+                </div>
             </Input>
             {showList && 
             <ul className="select-options">
