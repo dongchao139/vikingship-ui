@@ -31,8 +31,6 @@ export const InputNumber: React.FC<InputNumberProps> = (props) => {
     
     const [value, setvalue] = useState<number | string>(defaultValue || null);
     const [show, setShow] = useState<boolean>(false);
-    const [dot, setDot] = useState<boolean>(false);
-
     const handleChange = useCallback((e) => {
         const val: string = e.target.value;
         if (val === '') {
@@ -72,22 +70,16 @@ export const InputNumber: React.FC<InputNumberProps> = (props) => {
     });
     const renderNumber = (num) => {
         return <span onClick={() => setvalue(val => {
-            console.log(val);
             if (!val) {
                 return num;
             }
             if (num === '.') {
-                if (typeof val === 'string' && val.indexOf('.') !== (val.length - 1)) {
+                if (typeof val === 'string' && val.indexOf('.') !== (val.length - 1) 
+                    && val.indexOf('.') !== -1) {
                     return val;
                 }
-                return val + '.';
             }
-            if (typeof val === 'string' && val.lastIndexOf('.') === (val.length - 1)) {
-                var total = '' + val + num;
-                return total;
-            }
-            var total = '' + val + num;
-            return total;
+            return '' + val + num;
         })}>{num}</span>
     }
     return (
