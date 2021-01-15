@@ -21,3 +21,9 @@ export const Default = Template.bind({});
 Default.args = {
     defaultValue: 1
 }
+
+export const Calculator = Template.bind({});
+Calculator.args = {
+  defaultValue: '',
+  type: 'calculator'
+}

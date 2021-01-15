@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes, useCallback, useState } from 'react';
+import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react';
+import useClickOutside from '../../hooks/useClickOutside';
 import { Icon } from '../icon';
 import {Input} from '../Input';
 
@@ -8,9 +9,13 @@ export interface InputNumberProps extends Omit<InputHTMLAttributes<HTMLElement>,
      */
     disabled?: boolean;
     /**
+     * type
+     */
+    type?: 'default' | 'calculator';
+    /**
      * default value
      */
-    defaultValue?: number | '';
+    defaultValue?: number | string;
     /**
      * size
      */
@@ -22,14 +27,23 @@ export interface InputNumberProps extends Omit<InputHTMLAttributes<HTMLElement>,
 }
 
 export const InputNumber: React.FC<InputNumberProps> = (props) => {
-    const {onValueChange, defaultValue, children, ...restprops} = props;
+    const {onValueChange, type = 'default', defaultValue, children, ...restprops} = props;
     
-    const [value, setvalue] = useState<number | ''>(defaultValue || null)
+    const [value, setvalue] = useState<number | string>(defaultValue || null);
+    const [show, setShow] = useState<boolean>(false);
+    const [dot, setDot] = useState<boolean>(false);
 
     const handleChange = useCallback((e) => {
         const val: string = e.target.value;
         if (val === '') {
             setvalue('');
+            return;
+        }
+        if (val.charAt(val.length - 1) === '.') {
+            if (val.indexOf('.') !== (val.length - 1)) {
+                return;
+            }
+            setvalue(val);
             return;
         }
         const num: number = Number(val);
@@ -41,26 +55,66 @@ export const InputNumber: React.FC<InputNumberProps> = (props) => {
     }, []);
     const handleUp = useCallback(() => {
         const currVal = value || 0;
-        setvalue(currVal + 1)
+        setvalue(parseFloat(currVal + '') + 1)
     }, [value]);
     const handleDown = useCallback(() => {
         const currVal = value || 0;
-        setvalue(currVal - 1)
+        setvalue(parseFloat(currVal + '') - 1)
     }, [value]);
+
+    const ref = useRef();
+    const inputRef = useRef<HTMLElement>();
+
+    useClickOutside(ref, (e) => {
+        if (!inputRef.current.contains(e.target as HTMLElement)) {
+            setShow(false);
+        }
+    });
+    const renderNumber = (num) => {
+        return <span onClick={() => setvalue(val => {
+            console.log(val);
+            if (!val) {
+                return num;
+            }
+            if (num === '.') {
+                if (typeof val === 'string' && val.indexOf('.') !== (val.length - 1)) {
+                    return val;
+                }
+                return val + '.';
+            }
+            if (typeof val === 'string' && val.lastIndexOf('.') === (val.length - 1)) {
+                var total = '' + val + num;
+                return total;
+            }
+            var total = '' + val + num;
+            return total;
+        })}>{num}</span>
+    }
     return (
         <Input {...restprops} value={value}
-          onChange={handleChange}
+          onChange={handleChange} inputRef={inputRef}
+          onFocus={() => setShow(true)}
         >
+            {type === 'default' ? 
+            <>
             <span className="number-arrow-up"
-             onClick={handleUp}
+                onClick={handleUp}
             >
                 <Icon icon="angle-up"></Icon>
             </span>
             <span className="number-arrow-down"
-              onClick={handleDown}
+                onClick={handleDown}
             >
                 <Icon icon="angle-down"></Icon>
-            </span>
+            </span> 
+            </>:
+            (show ? <>
+            <Icon className="calculator-icon" icon="calculator"></Icon>
+            <div className="number-calculator" ref={ref}>
+                {[7,8,9,4,5,6,1,2,3,0,'.'].map(val => renderNumber(val))}
+                <span>确认</span>
+            </div></> : <><Icon className="calculator-icon" icon="calculator"></Icon></>)
+           }
         </Input>
 
     )

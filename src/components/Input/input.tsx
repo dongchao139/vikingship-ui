@@ -38,6 +38,10 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
    * icon was clicked
    */
   onIconClick?: () => void;
+  /**
+   * the input ref
+   */
+  inputRef?: any;
 }
 
 /**
@@ -45,7 +49,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
  * .input-group .input-group-append .input-group-prepend .input-inner
  */
 export const Input: React.FC<InputProps> = (props) => {
-  const {disabled, size, icon, prepend, append, style,placeholder, children,
+  const {disabled, size, icon, prepend, append, style,placeholder, children,inputRef,
     onIconClick, ...restProps} = props;
 
   const classes = classNames('viking-input-wrapper', {
@@ -61,7 +65,7 @@ export const Input: React.FC<InputProps> = (props) => {
       {prepend && <div className="viking-input-group-prepend">{prepend}</div>}
       {icon && <div className="icon-wrapper" onClick={onIconClick} ><Icon icon={icon}/></div>}
       <input placeholder={placeholder}
-             className="viking-input-inner"
+             className="viking-input-inner" ref={inputRef}
              disabled={disabled} {...restProps} />
       {children}
       {append && 

@@ -18,3 +18,25 @@
   vertical-align: -1.125em;
   margin-left: -2em;
 }
+
+.calculator-icon {
+  margin-left: -1.5em;
+  margin-top: 0.75em;
+}
+
+.number-calculator {
+  position: absolute;
+  right: 0;
+  top: 2.5em;
+  box-shadow: .1rem .1rem .2rem .15rem rgba($black, .15);
+  span {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+    line-height: 2;
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($primary, 30%);
+    }
+  }
+}
