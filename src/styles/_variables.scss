@@ -355,3 +355,8 @@ $select-options-font-family:  $input-font-family !default;
 $select-options-font-size:    $input-font-size !default;
 $select-options-font-weight:  $input-font-weight !default;
 $select-options-line-height:  $input-line-height !default;
+
+// input-date input-number
+$dropdown-shadow: .1rem .1rem .2rem .15rem rgba($black, .15);
+$dropdown-seperator: 1px solid $gray-600;
+$dropdown-padding: 0.5em;

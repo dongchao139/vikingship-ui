@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react';
-import useClickOutside from '../../hooks/useClickOutside';
+import {useClickOutside2} from '../../hooks/useClickOutside';
 import { Icon } from '../icon';
 import {Input} from '../Input';
 
@@ -63,10 +63,8 @@ export const InputNumber: React.FC<InputNumberProps> = (props) => {
     const ref = useRef();
     const inputRef = useRef<HTMLElement>();
 
-    useClickOutside(ref, (e) => {
-        if (!inputRef.current.contains(e.target as HTMLElement)) {
-            setShow(false);
-        }
+    useClickOutside2(ref,inputRef, () => {
+        setShow(false);
     });
     const renderNumber = (num) => {
         return <span onClick={() => setvalue(val => {

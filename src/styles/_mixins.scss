@@ -84,3 +84,34 @@
     border-top-left-radius: $raduis;
     border-bottom-left-radius: $raduis;
 }
+
+@mixin size($width, $height) {
+    height: $height;
+    width: $width;
+}
+
+@mixin margin-position($left,$right) {
+    margin-left: $left;
+    margin-top: $right;
+}
+
+@mixin absolute-position($top, $right) {
+    position: absolute;
+    top: $top;
+    right: $right;
+}
+
+@mixin table-cell($width, $height) {
+    width: $width;
+    height: $height;
+    text-align: center;  
+    font-weight: normal;
+}
+
+@mixin hover($bg-color, $color, $cursor) {
+    &:hover {
+        cursor: $cursor;
+        background-color: lighten($bg-color, 30%);
+        color: $color;
+    }
+}

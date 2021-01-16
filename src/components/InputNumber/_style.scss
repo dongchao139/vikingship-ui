@@ -28,7 +28,7 @@
   position: absolute;
   right: 0;
   top: 2.5em;
-  box-shadow: .1rem .1rem .2rem .15rem rgba($black, .15);
+  box-shadow: $dropdown-shadow;
   span {
     display: inline-block;
     width: 33.33%;
