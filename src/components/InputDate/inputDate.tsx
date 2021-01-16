@@ -14,7 +14,7 @@ export interface InputDateProps extends Omit<InputHTMLAttributes<HTMLElement>, '
    */
   size?: 'df' | 'lg' | 'sm';
 }
-
+const reg = /\d{4}-\d{2}-\d{2}/;
 const CalendarMap = {
   0: 31,
   1: 28,
@@ -78,25 +78,25 @@ function getDays(date: Date): Array<Array<{num: number, valid: boolean,today?:bo
   }
   return result;
 }
-function dateFormat(date, fmt) {
-  var o = {
-    "M+": date.getMonth() + 1,                 //月份 
-    "d+": date.getDate(),                    //日 
-    "h+": date.getHours(),                   //小时 
-    "m+": date.getMinutes(),                 //分 
-    "s+": date.getSeconds(),                 //秒 
-    "q+": Math.floor((date.getMonth() + 3) / 3), //季度 
-    "S": date.getMilliseconds()             //毫秒 
-  };
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+function getFullMonth(month: number) {
+  if (month < 9) {
+    return '0' + (month + 1);
   }
-  for (var k in o) {
-    if (new RegExp("(" + k + ")").test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-    }
-  }
-  return fmt;
+  return '' + (month + 1);
+}
+function simpleMonthFormate(date: Date) {
+  return date.getFullYear() + '年' + (getFullMonth(date.getMonth())) +  '月'
+}
+function simpleDateFormate(date: Date) {
+  return date.getFullYear() + '-' + (getFullMonth(date.getMonth())) + '-' + date.getDate();
+}
+function dateParse(dateStr): Date | null {
+  var dateArr = dateStr.split('-');
+  var year = parseInt(dateArr[0]);
+  var month = parseInt(dateArr[1]);
+  var day = parseInt(dateArr[2]);
+  var date = new Date(year,month -1, day);
+  return date;
 }
 export const InputDate: React.FC<InputDateProps> = ({
   ...restprops
@@ -108,43 +108,56 @@ export const InputDate: React.FC<InputDateProps> = ({
   useClickOutside2(ref, inputRef, () => {
     setShow(false);
   });
+  const [value, setValue] = useState<string>(simpleDateFormate(new Date()));
   function handleChange(e) {
-    // setDate(e.target.value);
+    setValue(e.target.value);
+    if (reg.test(e.target.value)) {
+      const val = dateParse(e.target.value);
+      val && setDate(val);
+    }
+  }
+  function handleBlur() {
+    if (!reg.test(value)) {
+      setValue(simpleDateFormate(date));
+    }
   }
   const dates = getDays(date);
-  const yearMonthStr = dateFormat(date, 'yyyy年MM月');
+  const yearMonthStr = simpleMonthFormate(date);
   function nextMonth() {
     let newDate = new Date(date.getTime());
-    newDate.setMonth((date.getMonth() +  1) % 12);
-    console.log(newDate);
+    newDate.setMonth((date.getMonth() +  1));
     setDate(newDate);
+    setValue(simpleDateFormate(newDate));
   }
   function preMonth() {
     let newDate = new Date(date.getTime());
-    newDate.setMonth((date.getMonth() - 1) % 12);
-    console.log(newDate);
+    newDate.setMonth((date.getMonth() - 1));
     setDate(newDate);
+    setValue(simpleDateFormate(newDate));
   }
   function nextYear() {
     let newDate = new Date(date.getTime());
     newDate.setFullYear((date.getFullYear() + 1));
-    console.log(newDate);
     setDate(newDate);
+    setValue(simpleDateFormate(newDate));
   }
   function preYear() {
     let newDate = new Date(date.getTime());
     newDate.setFullYear((date.getFullYear() - 1));
     setDate(newDate);
+    setValue(simpleDateFormate(newDate));
   }
   function handleClick(num) {
     let nextDate = new Date(date.getTime());
     nextDate.setDate(num);
     setDate(nextDate);
+    setValue(simpleDateFormate(nextDate));
   }
   return (
-    <Input {...restprops} value={dateFormat(date, 'yyyy年MM月dd日')}
+    <Input {...restprops} value={value}
       onChange={handleChange} inputRef={inputRef}
       onFocus={() => setShow(true)}
+      onBlur={handleBlur}
     >
       <Icon className="calendar-icon" icon="calendar"></Icon>
       {show ?
@@ -177,12 +190,17 @@ export const InputDate: React.FC<InputDateProps> = ({
             {dates.map(week => {
               return (
                 <tr>
-                  {week.map(date => {
+                  {week.map(d => {
                     let clz = classnames({
-                      invalid: !date.valid,
-                      today: date.today
+                      invalid: !d.valid,
+                      today: d.today,
+                      current: d.valid && d.num === date.getDate()
                     });
-                    return <td className={clz} onClick={() => date.valid && handleClick(date.num)}>{date.num}</td>
+                    return (
+                    <td className={clz} onClick={() => d.valid && handleClick(d.num)}>
+                      {d.num}
+                    </td>
+                    )
                   })}
                 </tr>
               )

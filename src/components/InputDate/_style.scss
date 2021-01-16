@@ -6,6 +6,7 @@
   box-shadow: $dropdown-shadow;
   font-size: 0.8rem;
   font-weight: normal;
+  user-select: none;
 
   .calendar-title {
     padding: $dropdown-padding;
@@ -27,13 +28,16 @@
       @include table-cell(2.5em, 2.5em);
     }
     td {
-      @include hover($primary, $black, pointer);
+      @include hover($info, $black, pointer);
     }
     td.invalid {
       color: $gray-500;
       @include hover($white, $gray-500, default);
     }
     td.today {
+      background-color: lighten($success, 25%);
+    }
+    td.current {
       background-color: lighten($primary, 25%);
     }
   }
