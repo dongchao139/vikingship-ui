@@ -14,7 +14,7 @@
     align-items: center;
     border-bottom: $dropdown-seperator;
     .angle-double-left,.angle-left,.angle-right, .angle-double-right {
-      color: $gray-600;
+      color: $gray-500;
       @include size(1.5em, 1em);
       @include hover($white, $black, pointer);
     }
