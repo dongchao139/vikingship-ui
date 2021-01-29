@@ -1,0 +1,47 @@
+.calendar {
+    .list {
+        display: inline-block;
+        height: 18em;
+        overflow: hidden;
+        vertical-align: bottom;
+        width: 4.35em;
+        .item {
+            line-height: 2.5;
+            padding-left: 1em;
+            padding-right: 1.5em;
+            width: 4.35em;
+            @include hover($primary, $white, pointer);
+        }
+        &:hover {
+            overflow-y: auto;
+        }
+    }
+    .list-hour::after {
+        content: "";
+        display: block;
+        height: 200px;
+    }
+    .list.list-bordered {
+        border-left: 1px solid $gray-300;
+        border-right: 1px solid $gray-300;
+    }
+    .calendar-footer {
+        border-top: 1px solid $gray-300;
+        height: 3.5em;
+        line-height: 3.5em;
+        padding: 0 1em;
+        color: $primary;
+        cursor: pointer;
+        .confirm {
+            border-radius: 3px;
+            position: absolute;
+            right: 1em;
+            bottom: 0.8em;
+            padding: 0.15em 0.6em 0.25em;
+            line-height: 1.5em;
+            display: inline-block;
+            background-color: $primary;
+            color: $white;
+        }
+    }
+}

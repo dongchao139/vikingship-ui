@@ -161,7 +161,7 @@ export const InputDate: React.FC<InputDateProps> = ({
       onBlur={handleBlur}
     >
       <Icon className="calendar-icon" icon="calendar"></Icon>
-      {<Transition in={show} animation="zoom-in-top" timeout={250} wrapper={false}>
+      <Transition in={show} animation="zoom-in-top" timeout={250} wrapper={false}>
         <div className='calendar' ref={ref}>
           <div className='calendar-title'>
             <Icon className='angle-double-left' icon='angle-double-left'
@@ -211,7 +211,7 @@ export const InputDate: React.FC<InputDateProps> = ({
            onClick={() => setDate(new Date())}
           >今天</div>
         </div>
-      </Transition>}
+      </Transition>
     </Input>
   )
 }
