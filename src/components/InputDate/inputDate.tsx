@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useRef, useState } from 'react'
 import { useClickOutside2 } from '../../hooks/useClickOutside';
 import { Icon } from '../icon';
 import { Input } from '../Input'
+import { Transition } from '../Transition';
 import classnames from 'classnames';
 
 export interface InputDateProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
@@ -160,7 +161,7 @@ export const InputDate: React.FC<InputDateProps> = ({
       onBlur={handleBlur}
     >
       <Icon className="calendar-icon" icon="calendar"></Icon>
-      {show ?
+      {<Transition in={show} animation="zoom-in-top" timeout={250} wrapper={false}>
         <div className='calendar' ref={ref}>
           <div className='calendar-title'>
             <Icon className='angle-double-left' icon='angle-double-left'
@@ -209,9 +210,8 @@ export const InputDate: React.FC<InputDateProps> = ({
           <div className="calendar-botton"
            onClick={() => setDate(new Date())}
           >今天</div>
-        </div> :
-        null
-      }
+        </div>
+      </Transition>}
     </Input>
   )
 }
