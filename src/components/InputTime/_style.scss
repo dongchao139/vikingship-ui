@@ -11,6 +11,9 @@
             padding-right: 1.5em;
             width: 4.35em;
             @include hover($primary, $white, pointer);
+            &.now {
+                background-color: lighten($success, 25%);
+            }
         }
         &:hover {
             overflow-y: auto;
